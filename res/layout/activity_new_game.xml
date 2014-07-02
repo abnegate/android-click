@@ -1,0 +1,48 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:click="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="jakebarnby.click.NewGame"
+    tools:ignore="MergeRootFrame" >
+
+    <ImageButton
+        android:id="@+id/button_clickbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="210dp"
+        android:adjustViewBounds="true"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/button_clickbutton_up"
+        android:onClick="updateCount"
+        android:src="@layout/button_background_selector" />
+
+    
+    <jakebarnby.click.MyTextView
+        android:id="@+id/textView_clickcount"
+        click:fontName="freescript.ttf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+       	android:layout_marginTop="550dp"
+        android:layout_marginLeft="120dp"
+        android:gravity="center"
+       	android:textColor="#000000"
+        android:textSize="40sp"
+        android:text="@string/initial_clicks" />
+    
+    <jakebarnby.click.MyTextView
+        android:id="@+id/textView_time"
+        click:fontName="freescript.ttf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-200dp"
+        android:layout_gravity="center"
+        android:gravity="center" 
+        android:textColor="#000000"
+        android:textSize="65sp" 
+        android:text="@string/click_to_begin" />
+    
+
+</FrameLayout>
+
