@@ -50,14 +50,19 @@ public class NewGame extends Activity {
 	 */
 	public void updateCount(View view) {
 		if (count == 0) {
-			//First click, start the countdown timer
+			//First click, start the count-down timer
 			new ClickTimer(16000, 1000, this).start();
 			TextView time = (TextView) findViewById(R.id.textView_time);
 			time.setTextSize(100);
 		}
-		this.count++;
-		TextView clicks = (TextView) findViewById(R.id.textView_clickcount);
-		clicks.setText("Clicks: " + count);
+		//Check if timer is zero therefore no more clicks should be counted
+		TextView time = (TextView) findViewById(R.id.textView_time);
+		if (!time.getText().equals("Out of time!")) {
+			this.count++;
+			TextView clicks = (TextView) findViewById(R.id.textView_clickcount);
+			clicks.setText("Clicks: " + count);
+		}
+
 	}
 
 	/**
