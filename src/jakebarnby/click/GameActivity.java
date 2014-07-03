@@ -1,7 +1,7 @@
 package jakebarnby.click;
 
 import android.app.Activity;
-import android.app.DialogFragment;
+import android.app.Dialog;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +9,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 public class GameActivity extends Activity {
@@ -44,33 +46,47 @@ public class GameActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
+
 	/**
 	 * Main game loop
+	 * 
 	 * @param view
 	 */
 	public void updateCount(View view) {
+		TextView time = (TextView) findViewById(R.id.textView_time);
 		if (count == 0) {
-			//First click, start the count-down timer
-			new ClickTimer(16000, 1000, this).start();
-			TextView time = (TextView) findViewById(R.id.textView_time);
+			// First click, start the count-down timer
+			new ClickTimer(5000, 1000, this).start();
+
 			time.setTextSize(100);
 		}
-		//Check if timer is zero therefore no more clicks should be counted
-		TextView time = (TextView) findViewById(R.id.textView_time);
 		if (!time.getText().equals("Out of time!")) {
+			// Check if timer is zero therefore no more clicks should be counted
 			this.count++;
 			TextView clicks = (TextView) findViewById(R.id.textView_clickcount);
 			clicks.setText("Clicks: " + count);
-		} else {
-			Bundle args = new Bundle();
-			args.putInt("clickCount", count);
-			
-			DialogFragment dialog = new GameOverDialog();
-			dialog.setArguments(args);
-			dialog.show(getFragmentManager(), "game over");
+		} else{
+			showDialog();
 		}
+	}
 
+	
+	/**
+	 * Show a game over dialog with stats of the game
+	 */
+	private void showDialog() {
+		// Create custom dialog object
+		final Dialog dialog = new Dialog(this);
+		//Removing the title of the dialog so custom one can be set
+		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		//Set custom layout to dialog
+		dialog.setContentView(R.layout.dialog);
+		//Dim the activity in the background
+		dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+		//Set the info
+		TextView info = (TextView) dialog.findViewById(R.id.textView_dialogInfo);
+		info.setText("Your score: " + count + "\nHigh score: \nClicks per second: " + (float) count / 5);
+		dialog.show();
 	}
 
 	/**

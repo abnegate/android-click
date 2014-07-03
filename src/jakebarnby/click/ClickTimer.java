@@ -5,6 +5,7 @@ import android.os.CountDownTimer;
 import android.widget.TextView;
 
 public class ClickTimer extends CountDownTimer {
+	
 
 	private Activity current;
 
@@ -24,5 +25,7 @@ public class ClickTimer extends CountDownTimer {
 		 TextView time = (TextView) current.findViewById(R.id.textView_time);
          time.setText("Out of time!");
 	}
+	
+
 
 }
