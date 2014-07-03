@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="jakebarnby.click"
     android:versionCode="1"
-    android:versionName="0.12" >
+    android:versionName="0.5" >
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -25,14 +25,6 @@
         <activity
             android:name="jakebarnby.click.GameActivity"
             android:label="@string/title_activity_new_game" >
-        </activity>
-        <activity
-            android:name="jakebarnby.click.HighScoreActivity"
-            android:label="@string/title_activity_high_score"
-            android:parentActivityName="jakebarnby.MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="jakebarnby.MainActivity" />
         </activity>
         <activity
             android:name="jakebarnby.click.Settings"

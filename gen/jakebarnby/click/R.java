@@ -36,15 +36,16 @@ containing a value of this type.
         public static final int ic_launcher=0x7f020003;
     }
     public static final class id {
-        public static final int action_settings=0x7f08000c;
+        public static final int action_settings=0x7f08000d;
         public static final int button_clickbutton=0x7f080005;
-        public static final int button_dialogNewGame=0x7f08000b;
-        public static final int button_dialogQuit=0x7f08000a;
+        public static final int button_dialogBack=0x7f08000b;
+        public static final int button_dialogRestart=0x7f08000c;
         public static final int button_highscore=0x7f080002;
         public static final int button_newgame=0x7f080001;
-        public static final int button_settings=0x7f080003;
+        public static final int button_quit=0x7f080003;
         public static final int click_title=0x7f080004;
         public static final int container=0x7f080000;
+        public static final int dialog_buttonBar=0x7f08000a;
         public static final int textView_clickcount=0x7f080006;
         public static final int textView_dialogInfo=0x7f080009;
         public static final int textView_dialogTitle=0x7f080008;
@@ -57,7 +58,7 @@ containing a value of this type.
         public static final int activity_settings=0x7f030003;
         public static final int button_background_selector=0x7f030004;
         public static final int custom_button=0x7f030005;
-        public static final int dialog=0x7f030006;
+        public static final int dialog_game_over=0x7f030006;
         public static final int fragment_high_score=0x7f030007;
         public static final int fragment_main=0x7f030008;
         public static final int fragment_new_game=0x7f030009;
@@ -75,11 +76,12 @@ containing a value of this type.
         public static final int button_clickbutton_up=0x7f050005;
         public static final int button_highscore=0x7f050003;
         public static final int button_newgame=0x7f050002;
-        public static final int button_settings=0x7f050004;
+        public static final int button_quit=0x7f050004;
         public static final int click_to_begin=0x7f05000a;
+        public static final int dialog_back=0x7f05000d;
         public static final int dialog_gameOver=0x7f05000b;
-        public static final int dialog_newGame=0x7f05000d;
-        public static final int dialog_quit=0x7f05000c;
+        public static final int dialog_highScore=0x7f05000c;
+        public static final int dialog_newGame=0x7f05000e;
         public static final int initial_clicks=0x7f050009;
         public static final int title_activity_high_score=0x7f050007;
         public static final int title_activity_new_game=0x7f050006;

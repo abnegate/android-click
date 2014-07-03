@@ -1,7 +1,9 @@
 package jakebarnby.click;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
@@ -51,23 +54,35 @@ public class MainActivity extends Activity {
 	}
 	
 	/**
-	 * Starts a new activity that displays the high scores
+	 * Starts a new dialog that displays the high scores
 	 */
 	public void highScore(View view) {
-		Intent intent = new Intent(MainActivity.this, HighScoreActivity.class);
-		this.startActivity(intent);
+		//Get the dialog object
+		CustomDialog dialogObj = new CustomDialog(this);
+		Dialog dialog = dialogObj.getDialog();
+		
+		if (!dialog.isShowing()) {
+			//Set values to containers
+			dialog.findViewById(R.id.button_dialogRestart).setVisibility(View.GONE);
+			dialog.findViewById(R.id.button_dialogBack).setVisibility(View.GONE);
+		
+			TextView title = (TextView) dialog.findViewById(R.id.textView_dialogTitle);
+			title.setText(R.string.dialog_highScore);
+		
+			TextView info = (TextView) dialog.findViewById(R.id.textView_dialogInfo);
+			info.setText("High score: " + this.getSharedPreferences("highScores", Context.MODE_PRIVATE).getInt("highScore", 0));
+			dialog.show();
+		}
 	}
 	
 	/**
-	 * Starts a new activity that runs the game.
+	 * Quits the application
 	 */
-	public void settings(View view) {
-		Intent intent = new Intent(MainActivity.this, Settings.class);
-		this.startActivity(intent);
+	public void quit(View view) {
+		finish();
+		System.exit(0);
 	}
 	
-	
-
 	/**
 	 * A placeholder fragment containing a simple view.
 	 */

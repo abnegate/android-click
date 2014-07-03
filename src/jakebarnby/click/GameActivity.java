@@ -3,14 +3,17 @@ package jakebarnby.click;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.Fragment;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class GameActivity extends Activity {
@@ -65,28 +68,84 @@ public class GameActivity extends Activity {
 			this.count++;
 			TextView clicks = (TextView) findViewById(R.id.textView_clickcount);
 			clicks.setText("Clicks: " + count);
-		} else{
-			showDialog();
+		} else {
+			//Timer has run out, finish the game
+			checkHighScore();
+			gameOverDialog();
+		}
+	}
+	
+	/**
+	 * Back button was pushed on dialog, go back to main activity
+	 */
+	public void back() {
+		this.finish();
+	}
+	
+	/**
+	 * New game button was pushed on dialog, recreate the activity
+	 */
+	public void restart() {
+		this.recreate();
+	}
+	
+	/**
+	 * Creates a custom dialog then displays information about the current game
+	 */
+	private void gameOverDialog() {
+		//Get the dialog object
+		CustomDialog dialogObj = new CustomDialog(this);
+		Dialog dialog = dialogObj.getDialog();
+		
+		if (!dialog.isShowing()) {
+			//Set values to containers
+			TextView title = (TextView) dialog.findViewById(R.id.textView_dialogTitle);
+			title.setText(R.string.dialog_gameOver);
+			TextView info = (TextView) dialog.findViewById(R.id.textView_dialogInfo);
+			info.setText("Your score: "
+					+ count
+					+ "\nHigh score: "
+					+ this.getSharedPreferences("highScores", Context.MODE_PRIVATE).getInt("highScore", 0)
+					+ "\nClicks per second: " + (float) count / 5);
+			setButtonListeners(dialog);	
+		
+			dialog.show();
 		}
 	}
 
-	
 	/**
-	 * Show a game over dialog with stats of the game
+	 * Sets listeners for the buttons of the game over dialog
+	 * @param dialog - The dialog parent of the buttons
 	 */
-	private void showDialog() {
-		// Create custom dialog object
-		final Dialog dialog = new Dialog(this);
-		//Removing the title of the dialog so custom one can be set
-		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		//Set custom layout to dialog
-		dialog.setContentView(R.layout.dialog);
-		//Dim the activity in the background
-		dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-		//Set the info
-		TextView info = (TextView) dialog.findViewById(R.id.textView_dialogInfo);
-		info.setText("Your score: " + count + "\nHigh score: \nClicks per second: " + (float) count / 5);
-		dialog.show();
+	private void setButtonListeners(Dialog dialog) {
+		Button back= (Button) dialog.findViewById(R.id.button_dialogBack);
+		back.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				back();
+			}
+		});
+		
+		Button restart = (Button) dialog.findViewById(R.id.button_dialogRestart);
+		restart.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				restart();
+			}
+		});
+		
+	}
+
+	private void checkHighScore() {
+		//Get the current high score
+		SharedPreferences prefs = this.getSharedPreferences("highScores", Context.MODE_PRIVATE);
+		int score = prefs.getInt("highScore", 0);
+		//If current score is greater than high score commit the new score
+		if (count > score) {
+			Editor editor = prefs.edit();
+			editor.putInt("highScore", count);
+			editor.commit();
+		}
 	}
 
 	/**

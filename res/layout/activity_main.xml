@@ -29,13 +29,13 @@
         style="@style/btnStyleNew"  />
         
     <Button
-        android:id="@+id/button_settings"
+        android:id="@+id/button_quit"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="540dp"
         android:ellipsize="middle"
-        android:onClick="settings"
-        android:text="@string/button_settings"
+        android:onClick="quit"
+        android:text="@string/button_quit"
         style="@style/btnStyleNew"  />
 
     <jakebarnby.click.MyTextView

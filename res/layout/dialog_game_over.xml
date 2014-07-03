@@ -8,7 +8,7 @@
     android:orientation="vertical"
    tools:context="jakebarnby.click.GameActivity" >
    
-    <jakebarnby.click.MyTextView
+	<jakebarnby.click.MyTextView
         android:background="#000000"
         android:id="@+id/textView_dialogTitle"
         click:fontName="freescript.ttf"
@@ -18,15 +18,14 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal" 
         android:textColor="#FFFFFF" 
-        android:textSize="55sp"
-        android:text="@string/dialog_gameOver"/>
-    "
-    <View android:background="#FFFFFF" 
+        android:textSize="55sp"/> 
+        
+	<View android:background="#FFFFFF" 
         android:layout_width = "fill_parent" 
-        android:layout_height="4dip" 
+        android:layout_height="3dip" 
         android:layout_centerVertical ="true" 
         android:layout_above="@+id/textView_dialogInfo"/>
-    
+  
     <jakebarnby.click.MyTextView
         android:id="@+id/textView_dialogInfo"
         click:fontName="freescript.ttf"
@@ -39,7 +38,14 @@
         android:textColor="#000000"
         android:textSize="35sp" />
     
+    <View android:background="#FFFFFF" 
+        android:layout_width = "fill_parent" 
+        android:layout_height="3dip" 
+        android:layout_centerVertical ="true" 
+        android:layout_above="@+id/dialog_buttonBar"/>
+    
     <LinearLayout
+        android:id="@+id/dialog_buttonBar"
         android:background="#000000"
     	android:layout_width="match_parent"
     	android:layout_height="wrap_content"
@@ -51,16 +57,16 @@
         
   	 	<Button
         	style="?android:attr/buttonBarButtonStyle"
-        	android:id="@+id/button_dialogQuit"
+        	android:id="@+id/button_dialogBack"
         	android:layout_weight="0.5"
        		android:layout_width="0dp"
         	android:layout_height="wrap_content"
         	android:textColor="#FFFFFF" 
-			android:text="@string/dialog_quit" />
+			android:text="@string/dialog_back" />
     
    		<Button
        		style="?android:attr/buttonBarButtonStyle"
-        	android:id="@+id/button_dialogNewGame"
+        	android:id="@+id/button_dialogRestart"
         	android:layout_weight="0.5"
        		android:layout_width="0dp"
         	android:layout_height="wrap_content"

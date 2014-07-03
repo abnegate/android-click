@@ -7,22 +7,22 @@ import android.widget.TextView;
 public class ClickTimer extends CountDownTimer {
 	
 
-	private Activity current;
+	private Activity activity;
 
 	public ClickTimer(long millisInFuture, long countDownInterval, Activity current) {
 		super(millisInFuture, countDownInterval);
-		this.current = current;
+		this.activity = current;
 	}
 
 	@Override
 	public void onTick(long millisUntilFinished) {
-			 TextView time = (TextView) current.findViewById(R.id.textView_time);
+			 TextView time = (TextView) activity.findViewById(R.id.textView_time);
 	         time.setText(String.valueOf(millisUntilFinished/1000));
 	     }
 
 	@Override
 	public void onFinish() {
-		 TextView time = (TextView) current.findViewById(R.id.textView_time);
+		 TextView time = (TextView) activity.findViewById(R.id.textView_time);
          time.setText("Out of time!");
 	}
 	
