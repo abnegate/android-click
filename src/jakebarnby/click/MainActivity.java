@@ -46,7 +46,7 @@ public class MainActivity extends Activity {
 	 * Starts a new activity that runs the game.
 	 */
 	public void newGame(View view) {
-		Intent intent = new Intent(MainActivity.this, NewGame.class);
+		Intent intent = new Intent(MainActivity.this, GameActivity.class);
 		this.startActivity(intent);
 	}
 	
@@ -54,7 +54,7 @@ public class MainActivity extends Activity {
 	 * Starts a new activity that displays the high scores
 	 */
 	public void highScore(View view) {
-		Intent intent = new Intent(MainActivity.this, HighScore.class);
+		Intent intent = new Intent(MainActivity.this, HighScoreActivity.class);
 		this.startActivity(intent);
 	}
 	

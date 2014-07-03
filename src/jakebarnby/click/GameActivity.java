@@ -1,6 +1,7 @@
 package jakebarnby.click;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class NewGame extends Activity {
+public class GameActivity extends Activity {
 
 	private int count = 0;
 
@@ -61,6 +62,13 @@ public class NewGame extends Activity {
 			this.count++;
 			TextView clicks = (TextView) findViewById(R.id.textView_clickcount);
 			clicks.setText("Clicks: " + count);
+		} else {
+			Bundle args = new Bundle();
+			args.putInt("clickCount", count);
+			
+			DialogFragment dialog = new GameOverDialog();
+			dialog.setArguments(args);
+			dialog.show(getFragmentManager(), "game over");
 		}
 
 	}

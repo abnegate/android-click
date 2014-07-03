@@ -1,0 +1,15 @@
+2/7/2014 6:30 v0.1 - Initial commit
+
+TODO:
+ - Fix allowed to click after timer zeroed
+ - Switch layouts from FrameLayout to RelativeLayout
+ - Implement notice dialog for stats at timer zero: score, current highscore, clicks/minute, play again
+ - Implement high score and settings activities
+
+
+2/27/2014 7:12 v0.11 - Fix users allowed to click after timer zeroed
+
+TODO:
+ - Switch layouts from FrameLayout to RelativeLayout
+ - Implement notice dialog for stats at timer zero: score, current highscore, clicks/second, play again
+ - Implement high score and settings activities

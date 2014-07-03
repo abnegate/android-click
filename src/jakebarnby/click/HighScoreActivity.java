@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class HighScore extends Activity {
+public class HighScoreActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
