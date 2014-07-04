@@ -14,9 +14,11 @@ import android.view.WindowManager;
 public class CustomDialog{
 	
 	private Activity activity;
+	private int layoutResId;
 	
-	public CustomDialog(Activity activity) {
+	public CustomDialog(Activity activity, int layoutResId) {
 		this.activity = activity;
+		this.layoutResId = layoutResId;
 	}
 	
 	/**
@@ -28,7 +30,7 @@ public class CustomDialog{
 		// Removing the title of the dialog so custom one can be set
 		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		// Set custom layout to dialog
-		dialog.setContentView(R.layout.dialog_game_over);
+		dialog.setContentView(layoutResId);
 		// Dim the activity in the background
 		dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
 		return dialog;

@@ -11,6 +11,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
@@ -18,12 +21,18 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 		setContentView(R.layout.activity_main);
 
 		if (savedInstanceState == null) {
 			getFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
+	}
+	@Override
+	protected void onResume() {
+		super.onResume();
+		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 	}
 
 	@Override
@@ -58,19 +67,29 @@ public class MainActivity extends Activity {
 	 */
 	public void highScore(View view) {
 		//Get the dialog object
-		CustomDialog dialogObj = new CustomDialog(this);
-		Dialog dialog = dialogObj.getDialog();
+		CustomDialog dialogObj = new CustomDialog(this, R.layout.dialog_high_score);
+		final Dialog dialog = dialogObj.getDialog();
+
 		
 		if (!dialog.isShowing()) {
+			//Set dim for the activity behind the dialog
+			WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();  
+			lp.dimAmount=0.8f; // Dim level. 0.0 - no dim, 1.0 - completely opaque
+			dialog.getWindow().setAttributes(lp);
+			
 			//Set values to containers
-			dialog.findViewById(R.id.button_dialogRestart).setVisibility(View.GONE);
-			dialog.findViewById(R.id.button_dialogBack).setVisibility(View.GONE);
-		
-			TextView title = (TextView) dialog.findViewById(R.id.textView_dialogTitle);
-			title.setText(R.string.dialog_highScore);
-		
-			TextView info = (TextView) dialog.findViewById(R.id.textView_dialogInfo);
-			info.setText("High score: " + this.getSharedPreferences("highScores", Context.MODE_PRIVATE).getInt("highScore", 0));
+			TextView info = (TextView) dialog.findViewById(R.id.textView_dialogHSInfo);
+			info.setText(""+this.getSharedPreferences("highScores", Context.MODE_PRIVATE).getInt("highScore", 0));
+			info.setTextSize(50);
+			
+			//Set listener for high score dialog button
+			Button close = (Button) dialog.findViewById(R.id.button_dialogHSBack);
+			close.setOnClickListener(new OnClickListener(){
+				@Override
+				public void onClick(View v) {
+					dialog.dismiss();
+				}
+			});
 			dialog.show();
 		}
 	}

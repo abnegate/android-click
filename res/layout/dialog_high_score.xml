@@ -1,0 +1,59 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:click="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:background="#FFD119"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+   tools:context="jakebarnby.click.GameActivity" >
+   
+	<jakebarnby.click.MyTextView
+        android:background="#000000"
+        android:id="@+id/textView_dialogHSTitle"
+        click:fontName="freescript.ttf"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal" 
+        android:textColor="#FFFFFF" 
+        android:textSize="55sp"
+        android:text="@string/dialog_highScore"/> 
+        
+	<View android:background="#FFFFFF" 
+        android:layout_width = "fill_parent" 
+        android:layout_height="3dip" 
+        android:layout_centerVertical ="true" 
+        android:layout_above="@+id/textView_dialogHSInfo"/>
+  
+    <jakebarnby.click.MyTextView
+        android:id="@+id/textView_dialogHSInfo"
+        click:fontName="freescript.ttf"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView_dialogHSTitle"
+        android:gravity="center_horizontal"
+        android:textColor="#000000"
+        android:textSize="35sp" />
+    
+    <View 
+        android:background="#FFFFFF" 
+        android:layout_width = "fill_parent" 
+        android:layout_height="3dip" 
+        android:layout_centerVertical ="true" 
+        android:layout_above="@+id/button_dialogHSBack"/>
+    
+
+    <Button
+        android:id="@+id/button_dialogHSBack"
+        android:background="#000000"
+		android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView_dialogHSInfo"
+        android:textColor="#FFFFFF" 
+		android:text="@string/dialog_close" />
+
+</RelativeLayout>

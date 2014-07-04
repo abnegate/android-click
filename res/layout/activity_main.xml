@@ -2,7 +2,6 @@
     xmlns:click="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
-    android:background="#FFD119"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="jakebarnby.click.MainActivity"
@@ -41,13 +40,13 @@
     <jakebarnby.click.MyTextView
         android:id="@+id/click_title"
         click:fontName="freescript.ttf"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="125dp"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/app_name"
+        android:gravity="center_horizontal"
         android:textColor="#000000"
-        android:textSize="145sp" />
+        android:textSize="145sp"
+        android:text="@string/app_name" />
             
 </FrameLayout>
 

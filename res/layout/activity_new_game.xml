@@ -2,7 +2,6 @@
     xmlns:click="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
-    android:background="#FFD119"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="jakebarnby.click.GameActivity"
@@ -24,10 +23,10 @@
     <jakebarnby.click.MyTextView
         android:id="@+id/textView_clickcount"
         click:fontName="freescript.ttf"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
        	android:layout_marginTop="550dp"
-        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
         android:textColor="#000000"
         android:textSize="40sp"
         android:text="@string/initial_clicks" />
@@ -35,11 +34,10 @@
     <jakebarnby.click.MyTextView
         android:id="@+id/textView_time"
         click:fontName="freescript.ttf"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center" 
+        android:gravity="center_horizontal"
         android:textColor="#000000"
         android:textSize="65sp" 
         android:text="@string/click_to_begin" />
