@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">Click!</string>
     <string name="action_settings">Settings</string>
     <string name="button_newgame">New Game</string>
@@ -13,4 +14,8 @@
     <string name="dialog_highScore">High Score</string>
     <string name="dialog_close">Close</string>
     <string name="dialog_newGame">New game</string>
+    <string name="title_activity_ad">AdActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="interstitial_unit_id">ca-app-pub-4043849132226838/3728744301</string>
+	<string name="banner_unit_id">ca-app-pub-4043849132226838/4324173506</string>
 </resources>

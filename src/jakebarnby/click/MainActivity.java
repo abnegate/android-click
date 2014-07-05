@@ -1,5 +1,8 @@
 package jakebarnby.click;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.Fragment;
@@ -17,6 +20,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
+	
+    private InterstitialAd interstitial;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +33,17 @@ public class MainActivity extends Activity {
 			getFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
+		
+        interstitial = new InterstitialAd(this);
+        interstitial.setAdUnitId(getResources().getString(R.string.interstitial_unit_id));
+        interstitial.setAdListener(new MyAdListener(this) {
+        	@Override
+        	public void onAdClosed() {
+        		finish();
+        		System.exit(0);
+        	}
+        });
+		interstitial.loadAd(new AdRequest.Builder().addTestDevice("C6B56C5E1BAA0F338C091FC79F9289C2").build());
 	}
 	@Override
 	protected void onResume() {
@@ -98,8 +114,10 @@ public class MainActivity extends Activity {
 	 * Quits the application
 	 */
 	public void quit(View view) {
-		finish();
-		System.exit(0);
+        if (interstitial.isLoaded()) {
+            interstitial.show();
+        }
+        
 	}
 	
 	/**

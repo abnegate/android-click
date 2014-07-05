@@ -1,5 +1,8 @@
 package jakebarnby.click;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.Fragment;
@@ -19,6 +22,7 @@ import android.widget.TextView;
 
 public class GameActivity extends Activity {
 
+	private AdView banner;
 	private int count = 0;
 
 	@Override
@@ -31,6 +35,13 @@ public class GameActivity extends Activity {
 			getFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
+		
+		//Code for ad at top of game activity
+		// Look up the AdView as a resource and load a request.
+		banner = (AdView) this.findViewById(R.id.adView);
+		banner.setAdListener(new MyAdListener(this));
+		AdRequest adRequest = new AdRequest.Builder().addTestDevice("C6B56C5E1BAA0F338C091FC79F9289C2").build();
+		banner.loadAd(adRequest);
 	}
 
 	@Override
@@ -52,6 +63,32 @@ public class GameActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
+	@Override
+	public void onResume() {
+		super.onResume();
+		if (banner != null) {
+			banner.resume();
+		}
+	}
+
+	@Override
+	public void onPause() {
+		if (banner != null) {
+			banner.pause();
+		}
+		super.onPause();
+	}
+
+	/** Called before the activity is destroyed. */
+	@Override
+	public void onDestroy() {
+		// Destroy the AdView.
+		if (banner != null) {
+			banner.destroy();
+		}
+		super.onDestroy();
+	}
+
 	/**
 	 * Main game loop
 	 * 
@@ -71,68 +108,76 @@ public class GameActivity extends Activity {
 			TextView clicks = (TextView) findViewById(R.id.textView_clickcount);
 			clicks.setText("Clicks: " + count);
 		} else {
-			//Timer has run out, finish the game
+			// Timer has run out, finish the game
 			checkHighScore();
 			gameOverDialog();
 		}
 	}
-	
+
 	/**
 	 * Creates a custom dialog then displays information about the current game
 	 */
 	private void gameOverDialog() {
-		//Get the dialog object
-		CustomDialog dialogObj = new CustomDialog(this, R.layout.dialog_game_over);
+		// Get the dialog object
+		CustomDialog dialogObj = new CustomDialog(this,
+				R.layout.dialog_game_over);
 		Dialog dialog = dialogObj.getDialog();
-		
+
 		if (!dialog.isShowing()) {
-			//Set dim for the activity behind the dialog
-			WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();  
-			lp.dimAmount=0.8f; // Dim level. 0.0 - no dim, 1.0 - completely opaque
+			// Set dim for the activity behind the dialog
+			WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();
+			lp.dimAmount = 0.8f; // Dim level. 0.0 - no dim, 1.0 - completely
+									// opaque
 			dialog.getWindow().setAttributes(lp);
-			
-			//Set values to containers
-			TextView info = (TextView) dialog.findViewById(R.id.textView_dialogGOInfo);
+
+			// Set values to containers
+			TextView info = (TextView) dialog
+					.findViewById(R.id.textView_dialogGOInfo);
 			info.setText("Your score: "
 					+ count
 					+ "\nHigh score: "
-					+ this.getSharedPreferences("highScores", Context.MODE_PRIVATE).getInt("highScore", 0)
+					+ this.getSharedPreferences("highScores",
+							Context.MODE_PRIVATE).getInt("highScore", 0)
 					+ "\nClicks per second: " + (float) count / 5);
-			setButtonListeners(dialog);	
+			setButtonListeners(dialog);
 			dialog.show();
 		}
 	}
 
 	/**
 	 * Sets listeners for the buttons of the game over dialog
-	 * @param dialog - The dialog parent of the buttons
+	 * 
+	 * @param dialog
+	 *            - The dialog parent of the buttons
 	 */
 	private void setButtonListeners(final Dialog dialog) {
 		Button close = (Button) dialog.findViewById(R.id.button_dialogGOBack);
-		close.setOnClickListener(new OnClickListener(){
+		close.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				dialog.dismiss();
 				finish();
 			}
 		});
-		
-		Button restart = (Button) dialog.findViewById(R.id.button_dialogGORestart);
-		restart.setOnClickListener(new OnClickListener(){
+
+		Button restart = (Button) dialog
+				.findViewById(R.id.button_dialogGORestart);
+		restart.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				dialog.dismiss();
 				recreate();
 			}
 		});
-		
+
 	}
 
 	private void checkHighScore() {
-		//Get the current high score
-		SharedPreferences prefs = this.getSharedPreferences("highScores", Context.MODE_PRIVATE);
+		// Get the current high score
+		SharedPreferences prefs = this.getSharedPreferences("highScores",
+				Context.MODE_PRIVATE);
 		int score = prefs.getInt("highScore", 0);
-		//If current score is greater than high score commit the new score
+		// If current score is greater than high score commit the new score
 		if (count > score) {
 			Editor editor = prefs.edit();
 			editor.putInt("highScore", count);
