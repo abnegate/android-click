@@ -84,11 +84,10 @@ public class MainActivity extends Activity {
 	/**
 	 * Quits the application
 	 */
-	public void quit(View view) {
+	public void showInsertitial(View view) {
         if (interstitial.isLoaded()) {
             interstitial.show();
-        }
-        
+        }   
 	}
 	
 	/**

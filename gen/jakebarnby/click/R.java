@@ -470,7 +470,7 @@ containing a value of this type.
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int activity_new_game=0x7f030001;
-        public static final int button_background_selector=0x7f030002;
+        public static final int clickbutton_background_selector=0x7f030002;
         public static final int custom_button=0x7f030003;
         public static final int dialog_game_over=0x7f030004;
         public static final int dialog_high_score=0x7f030005;
@@ -625,6 +625,7 @@ containing a value of this type.
         /**  Application theme. 
          */
         public static final int AppTheme=0x7f090005;
+        public static final int FadeDialogAnimation=0x7f090006;
         public static final int WalletFragmentDefaultButtonTextAppearance=0x7f090002;
         public static final int WalletFragmentDefaultDetailsHeaderTextAppearance=0x7f090001;
         public static final int WalletFragmentDefaultDetailsTextAppearance=0x7f090000;
@@ -636,7 +637,7 @@ containing a value of this type.
         public static final int WalletFragmentDefaultStyle=0x7f090003;
         /**   Custom button style.  
          */
-        public static final int btnStyleNew=0x7f090006;
+        public static final int btnStyleNew=0x7f090007;
     }
     public static final class styleable {
         /** Attributes that can be used with a AdsAttrs.

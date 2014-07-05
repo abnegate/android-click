@@ -18,7 +18,7 @@
         android:background="@android:color/transparent"
         android:contentDescription="@string/button_clickbutton_up"
         android:onClick="updateCount"
-        android:src="@layout/button_background_selector" />
+        android:src="@layout/clickbutton_background_selector" />
 
     
     <jakebarnby.click.MyTextView

@@ -35,11 +35,12 @@ public class HighScoreDialog extends CustomDialog {
 			WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();  
 			lp.dimAmount=0.8f; // Dim level. 0.0 - no dim, 1.0 - completely opaque
 			dialog.getWindow().setAttributes(lp);
+			//Set fade in/out animation
+			dialog.getWindow().getAttributes().windowAnimations = R.style.FadeDialogAnimation;
 			
 			//Set values to containers
 			TextView info = (TextView) dialog.findViewById(R.id.textView_dialogHSInfo);
-			info.setText("" + highScore);
-			info.setTextSize(50);
+			info.setText(String.valueOf(highScore));
 			
 			//Set listener for high highScore dialog button
 			Button close = (Button) dialog.findViewById(R.id.button_dialogHSBack);

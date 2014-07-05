@@ -21,13 +21,15 @@ public class ClickTimer extends CountDownTimer {
 
 	@Override
 	public void onTick(long millisUntilFinished) {
-			 TextView time = (TextView) activity.findViewById(R.id.textView_time);
-	         time.setText(String.valueOf(millisUntilFinished/1000));
+			TextView time = (TextView) activity.findViewById(R.id.textView_time);
+	        time.setText(String.valueOf(millisUntilFinished/1000));
 	     }
 
 	@Override
 	public void onFinish() {
 		 finished  = true;
+		 TextView time = (TextView) activity.findViewById(R.id.textView_time);
+         time.setText(String.valueOf(0));
 		 if (activity.hasWindowFocus()) {
 			 new GameOverDialog(activity, R.layout.dialog_game_over, GameActivity.getCount()).showDialog();
 		 }

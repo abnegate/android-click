@@ -33,7 +33,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="540dp"
         android:ellipsize="middle"
-        android:onClick="quit"
+        android:onClick="showInsertitial"
         android:text="@string/button_quit"
         style="@style/btnStyleNew"  />
 

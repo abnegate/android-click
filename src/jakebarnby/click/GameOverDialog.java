@@ -41,9 +41,10 @@ public class GameOverDialog extends CustomDialog {
 		if (!dialog.isShowing()) {
 			// Set dim for the activity behind the dialog
 			WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();
-			lp.dimAmount = 0.8f; // Dim level. 0.0 - no dim, 1.0 - completely
-									// opaque
+			lp.dimAmount = 0.8f; // Dim level. 0.0 - no dim, 1.0 - opaque
 			dialog.getWindow().setAttributes(lp);
+			//Set fade in/out animation
+			dialog.getWindow().getAttributes().windowAnimations = R.style.FadeDialogAnimation;
 
 			// Set values to containers
 			TextView info = (TextView) dialog
@@ -82,8 +83,8 @@ public class GameOverDialog extends CustomDialog {
 		close.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				dialog.dismiss();
 				getActivity().finish();
+				dialog.dismiss();
 			}
 		});
 
@@ -100,10 +101,10 @@ public class GameOverDialog extends CustomDialog {
 		dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 			@Override
             public boolean onKey(DialogInterface arg0, int keyCode, KeyEvent event) {
-                // TODO Auto-generated method stub
                 if (keyCode == KeyEvent.KEYCODE_BACK) {
-                    getActivity().recreate();
-                    dialog.dismiss();
+                	getActivity().setContentView(R.layout.activity_new_game);
+    				GameActivity.setCount(0);
+    				dialog.dismiss();
                 }
                 return true;
             }

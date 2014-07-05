@@ -20,6 +20,11 @@
     		<item name="android:windowBackground">@color/background</item>
     </style>
     
+    <style name="FadeDialogAnimation">
+    	<item name="android:windowEnterAnimation">@anim/fadein</item>
+    	<item name="android:windowExitAnimation">@anim/fadeout</item>
+	</style>
+    
     <!--  Custom button style.  -->
     <style name="btnStyleNew" parent="@android:style/Widget.Button">
        <item name="android:textSize">15sp</item>
@@ -33,5 +38,7 @@
        <item name="android:background">@layout/custom_button</item>
        <item name="android:padding">10dip</item>
    </style>
+   
+    
 
 </resources>

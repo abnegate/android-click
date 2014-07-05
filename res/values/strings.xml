@@ -9,7 +9,7 @@
     <string name="button_clickbutton_up">Click it!</string>
     <string name="title_activity_new_game">NewGame</string>
     <string name="initial_clicks">Clicks: 0</string>
-    <string name="click_to_begin">Click to begin!</string>
+    <string name="click_to_begin">Click quick!</string>
     <string name="dialog_gameOver">Game over</string>
     <string name="dialog_highScore">High Score</string>
     <string name="dialog_close">Close</string>
@@ -17,5 +17,6 @@
     <string name="title_activity_ad">AdActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="interstitial_unit_id">ca-app-pub-4043849132226838/3728744301</string>
-	<string name="banner_unit_id">ca-app-pub-4043849132226838/4324173506</string>
+    <string name="banner_unit_id">ca-app-pub-4043849132226838/4324173506</string>
+
 </resources>

@@ -57,22 +57,20 @@
    		style="?android:attr/buttonBarStyle" >
         
   	 	<Button
-        	style="?android:attr/buttonBarButtonStyle"
         	android:id="@+id/button_dialogGOBack"
         	android:layout_weight="0.5"
        		android:layout_width="0dp"
         	android:layout_height="wrap_content"
-        	android:textColor="@color/white"
-			android:text="@string/dialog_close" />
+			android:text="@string/dialog_close"
+			style="@style/btnStyleNew" />
     
    		<Button
-       		style="?android:attr/buttonBarButtonStyle"
         	android:id="@+id/button_dialogGORestart"
         	android:layout_weight="0.5"
        		android:layout_width="0dp"
         	android:layout_height="wrap_content"
-        	android:textColor="@color/white"
-        	android:text="@string/dialog_newGame"  />
+        	android:text="@string/dialog_newGame"
+        	style="@style/btnStyleNew"  />
 	</LinearLayout>
 </RelativeLayout>
 

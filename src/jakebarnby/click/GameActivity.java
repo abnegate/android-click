@@ -102,7 +102,8 @@ public class GameActivity extends Activity {
 		if (count == 0) {
 			// First click, start the count-down timer
 			timer.start();
-			TextView time = (TextView) findViewById(R.id.textView_time);time.setTextSize(100);
+			TextView time = (TextView) this.findViewById(R.id.textView_time);
+			time.setTextSize(115);
 		}
 		if (!timer.isFinished()) {
 			// Timer isn't finished so increase count and update text

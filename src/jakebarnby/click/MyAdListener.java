@@ -1,6 +1,6 @@
 package jakebarnby.click;
 
-import android.content.Context;
+import android.app.Activity;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdListener;
@@ -8,10 +8,15 @@ import com.google.android.gms.ads.AdRequest;
 
 public class MyAdListener extends AdListener {
 	 
-	private Context context;
+	private Activity activity;
 	
-	public MyAdListener(Context context) {
-		this.context = context;
+	public MyAdListener(Activity activity) {
+		this.activity = activity;
+	}
+	
+	@Override
+	public void onAdClosed() {
+		activity.setContentView(R.layout.activity_new_game);
 	}
 
 	@Override
@@ -31,7 +36,7 @@ public class MyAdListener extends AdListener {
                 errorReason = "No fill";
                 break;
         }
-        Toast.makeText(context, String.format("onAdFailedToLoad(%s)", errorReason),
+        Toast.makeText(activity, String.format("onAdFailedToLoad(%s)", errorReason),
                 Toast.LENGTH_SHORT).show();
     }
 }

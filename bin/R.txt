@@ -140,7 +140,7 @@ int id wrap_content 0x7f07000d
 int integer google_play_services_version 0x7f080000
 int layout activity_main 0x7f030000
 int layout activity_new_game 0x7f030001
-int layout button_background_selector 0x7f030002
+int layout clickbutton_background_selector 0x7f030002
 int layout custom_button 0x7f030003
 int layout dialog_game_over 0x7f030004
 int layout dialog_high_score 0x7f030005
@@ -199,11 +199,12 @@ int string title_activity_new_game 0x7f050026
 int string wallet_buy_button_place_holder 0x7f05001f
 int style AppBaseTheme 0x7f090004
 int style AppTheme 0x7f090005
+int style FadeDialogAnimation 0x7f090006
 int style WalletFragmentDefaultButtonTextAppearance 0x7f090002
 int style WalletFragmentDefaultDetailsHeaderTextAppearance 0x7f090001
 int style WalletFragmentDefaultDetailsTextAppearance 0x7f090000
 int style WalletFragmentDefaultStyle 0x7f090003
-int style btnStyleNew 0x7f090006
+int style btnStyleNew 0x7f090007
 int[] styleable AdsAttrs { 0x7f010000, 0x7f010001, 0x7f010002 }
 int styleable AdsAttrs_adSize 0
 int styleable AdsAttrs_adSizes 1
