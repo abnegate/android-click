@@ -1,0 +1,33 @@
+# view AndroidManifest.xml #generated:36
+-keep class com.google.android.gms.ads.AdActivity { <init>(...); }
+
+# view res/layout/activity_new_game.xml #generated:47
+-keep class com.google.android.gms.ads.AdView { <init>(...); }
+
+# view AndroidManifest.xml #generated:32
+-keep class jakebarnby.click.GameActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:23
+-keep class jakebarnby.click.MainActivity { <init>(...); }
+
+# view res/layout/activity_main.xml #generated:40
+# view res/layout/activity_new_game.xml #generated:24
+# view res/layout/activity_new_game.xml #generated:35
+# view res/layout/dialog_game_over.xml #generated:11
+# view res/layout/dialog_game_over.xml #generated:30
+# view res/layout/dialog_high_score.xml #generated:11
+# view res/layout/dialog_high_score.xml #generated:30
+-keep class jakebarnby.click.MyTextView { <init>(...); }
+
+# onClick res/layout/activity_main.xml #generated:20
+-keepclassmembers class * { *** highScore(...); }
+
+# onClick res/layout/activity_main.xml #generated:10
+-keepclassmembers class * { *** newGame(...); }
+
+# onClick res/layout/activity_main.xml #generated:30
+-keepclassmembers class * { *** showInsertitial(...); }
+
+# onClick res/layout/activity_new_game.xml #generated:11
+-keepclassmembers class * { *** updateCount(...); }
+

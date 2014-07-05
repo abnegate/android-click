@@ -17,6 +17,9 @@ import android.view.ViewGroup;
 public class MainActivity extends Activity {
 	
     private InterstitialAd interstitial;
+    
+	private HighScoreDialog highScoreDialog;
+	private int highScore;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,8 @@ public class MainActivity extends Activity {
 			getFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
+		this.highScore = this.getSharedPreferences("highScores", Context.MODE_PRIVATE).getInt("highScore", 0);
+		this.highScoreDialog = new HighScoreDialog(this, R.layout.dialog_high_score, highScore);
 		
         interstitial = new InterstitialAd(this);
         interstitial.setAdUnitId(getResources().getString(R.string.interstitial_unit_id));
@@ -44,6 +49,7 @@ public class MainActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+		this.highScore = this.getSharedPreferences("highScores", Context.MODE_PRIVATE).getInt("highScore", 0);
 	}
 
 	@Override
@@ -77,12 +83,12 @@ public class MainActivity extends Activity {
 	 * Starts a new dialog that displays the high scores
 	 */
 	public void highScore(View view) {
-		int score = this.getSharedPreferences("highScores", Context.MODE_PRIVATE).getInt("highScore", 0);
-		new HighScoreDialog(this, R.layout.dialog_high_score, score).showDialog();
+		highScoreDialog.setScore(highScore);
+		highScoreDialog.showDialog();
 	}
 	
 	/**
-	 * Quits the application
+	 * Quits the application after showing an ad
 	 */
 	public void showInsertitial(View view) {
         if (interstitial.isLoaded()) {

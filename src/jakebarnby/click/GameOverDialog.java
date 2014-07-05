@@ -23,6 +23,10 @@ public class GameOverDialog extends CustomDialog {
 
 	private int count;
 
+	public void setCount(int count) {
+		this.count = count;
+	}
+
 	public GameOverDialog(Activity activity, int layoutResId, int count) {
 		super(activity, layoutResId);
 		this.count = count;

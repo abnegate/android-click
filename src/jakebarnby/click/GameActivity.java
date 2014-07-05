@@ -1,8 +1,5 @@
 package jakebarnby.click;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
@@ -13,10 +10,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 public class GameActivity extends Activity {
 
 	private ClickTimer timer;
-	private AdView banner;
+	
+	private AdView adView;
+	private MyAdListener adListener;
+	private AdRequest adRequest;
+	
 	private static int count = 0;
 
 	public static int getCount() {
@@ -31,12 +35,16 @@ public class GameActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-		setContentView(R.layout.activity_new_game);
 
 		if (savedInstanceState == null) {
 			getFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
+		timer = (ClickTimer) new ClickTimer(5000, 1000, this);
+		adListener = new MyAdListener(this);
+		adRequest = new AdRequest.Builder().addTestDevice("C6B56C5E1BAA0F338C091FC79F9289C2").build();
+		
+		setContentView(R.layout.activity_new_game);
 	}
 
 	@Override
@@ -61,18 +69,18 @@ public class GameActivity extends Activity {
 	@Override
 	public void onResume() {
 		super.onResume();
-		// Resume ad banner
-		if (banner != null) {
-			banner.resume();
+		// Resume ad adView
+		if (adView != null) {
+			adView.resume();
 		}
 		count = 0;
 	}
 
 	@Override
 	public void onPause() {
-		// Pause ad banner
-		if (banner != null) {
-			banner.pause();
+		// Pause ad adView
+		if (adView != null) {
+			adView.pause();
 		}
 		super.onPause();
 
@@ -80,12 +88,13 @@ public class GameActivity extends Activity {
 
 	@Override
 	public void onDestroy() {
-		// Destroy ad banner
-		if (banner != null) {
-			banner.destroy();
+		// Destroy ad adView
+		if (adView != null) {
+			adView.destroy();
 		}
 		super.onDestroy();
 	}
+	
 	@Override
 	public void onContentChanged() {
 		setupAds();
@@ -97,12 +106,11 @@ public class GameActivity extends Activity {
 	 * @param view
 	 */
 	public void updateCount(View view) {
-		timer = (ClickTimer) new ClickTimer(5000, 1000, this);
-
 		if (count == 0) {
 			// First click, start the count-down timer
+			timer.reset();
 			timer.start();
-			TextView time = (TextView) this.findViewById(R.id.textView_time);
+			TextView time = (TextView) findViewById(R.id.textView_time);
 			time.setTextSize(115);
 		}
 		if (!timer.isFinished()) {
@@ -115,13 +123,11 @@ public class GameActivity extends Activity {
 
 	private void setupAds() {
 		// Look up the AdView as a resource and load a request.
-		banner = (AdView) this.findViewById(R.id.adView);
+		adView = (AdView) this.findViewById(R.id.adView);
 		// Set the custom ad listener
-		banner.setAdListener(new MyAdListener(this));
+		adView.setAdListener(adListener);
 		// Build an ad request
-		AdRequest adRequest = new AdRequest.Builder().addTestDevice(
-				"C6B56C5E1BAA0F338C091FC79F9289C2").build();
-		banner.loadAd(adRequest);
+		adView.loadAd(adRequest);
 	}
 
 	/**

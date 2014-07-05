@@ -8,6 +8,7 @@ public class ClickTimer extends CountDownTimer {
 	
 
 	private Activity activity;
+	private GameOverDialog gameOverDialog;
 	private boolean finished = false;
 
 	public boolean isFinished() {
@@ -17,6 +18,7 @@ public class ClickTimer extends CountDownTimer {
 	public ClickTimer(long millisInFuture, long countDownInterval, Activity current) {
 		super(millisInFuture, countDownInterval);
 		this.activity = current;
+		this.gameOverDialog = new GameOverDialog(activity, R.layout.dialog_game_over, GameActivity.getCount());
 	}
 
 	@Override
@@ -31,7 +33,16 @@ public class ClickTimer extends CountDownTimer {
 		 TextView time = (TextView) activity.findViewById(R.id.textView_time);
          time.setText(String.valueOf(0));
 		 if (activity.hasWindowFocus()) {
-			 new GameOverDialog(activity, R.layout.dialog_game_over, GameActivity.getCount()).showDialog();
-		 }
+			 gameOverDialog.setCount(GameActivity.getCount());
+			 gameOverDialog.showDialog();
+		 } 
 	}
+	
+	/**
+	 * Resets the timer
+	 */
+	public void reset() {
+		this.finished = false;
+	}
+	
 }

@@ -53,4 +53,12 @@ public class HighScoreDialog extends CustomDialog {
 			dialog.show();
 		}	
 	}
+	
+	public int getScore() {
+		return this.highScore;
+	}
+	
+	public void setScore(int highScore) {
+		this.highScore = highScore;
+	}
 }
