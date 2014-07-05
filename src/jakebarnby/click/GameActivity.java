@@ -23,6 +23,10 @@ public class GameActivity extends Activity {
 		return count;
 	}
 
+	public static void setCount(int newCount) {
+		count = newCount;
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -33,14 +37,6 @@ public class GameActivity extends Activity {
 			getFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
-
-		// Code for ad at top of game activity
-		// Look up the AdView as a resource and load a request.
-		banner = (AdView) this.findViewById(R.id.adView);
-		banner.setAdListener(new MyAdListener(this));
-		AdRequest adRequest = new AdRequest.Builder().addTestDevice(
-				"C6B56C5E1BAA0F338C091FC79F9289C2").build();
-		banner.loadAd(adRequest);
 	}
 
 	@Override
@@ -64,8 +60,8 @@ public class GameActivity extends Activity {
 
 	@Override
 	public void onResume() {
-		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 		super.onResume();
+		// Resume ad banner
 		if (banner != null) {
 			banner.resume();
 		}
@@ -74,11 +70,9 @@ public class GameActivity extends Activity {
 
 	@Override
 	public void onPause() {
+		// Pause ad banner
 		if (banner != null) {
 			banner.pause();
-		}
-		if (timer != null) {
-			timer.cancel();
 		}
 		super.onPause();
 
@@ -86,34 +80,47 @@ public class GameActivity extends Activity {
 
 	@Override
 	public void onDestroy() {
+		// Destroy ad banner
 		if (banner != null) {
 			banner.destroy();
 		}
-		if (timer != null) {
-			timer.cancel();
-		}
 		super.onDestroy();
+	}
+	@Override
+	public void onContentChanged() {
+		setupAds();
 	}
 
 	/**
-	 * Main game loop
+	 * Run from button_clickbutton onClick, serves as main game loop
 	 * 
 	 * @param view
 	 */
 	public void updateCount(View view) {
 		timer = (ClickTimer) new ClickTimer(5000, 1000, this);
-		TextView time = (TextView) findViewById(R.id.textView_time);
+
 		if (count == 0) {
 			// First click, start the count-down timer
 			timer.start();
-
-			time.setTextSize(100);
+			TextView time = (TextView) findViewById(R.id.textView_time);time.setTextSize(100);
 		}
 		if (!timer.isFinished()) {
+			// Timer isn't finished so increase count and update text
 			GameActivity.count++;
 			TextView clicks = (TextView) findViewById(R.id.textView_clickcount);
 			clicks.setText("Clicks: " + count);
 		}
+	}
+
+	private void setupAds() {
+		// Look up the AdView as a resource and load a request.
+		banner = (AdView) this.findViewById(R.id.adView);
+		// Set the custom ad listener
+		banner.setAdListener(new MyAdListener(this));
+		// Build an ad request
+		AdRequest adRequest = new AdRequest.Builder().addTestDevice(
+				"C6B56C5E1BAA0F338C091FC79F9289C2").build();
+		banner.loadAd(adRequest);
 	}
 
 	/**

@@ -48,7 +48,7 @@ TODO:
  - Cleaning up project files
  - Fix button click effects for high score dialog
 ----------------------------------------------------------------------------------------
-   6/7/2014 02:04 v0.92 - Fix bug in dialog
+   6/7/2014 02:04 v0.92 - Fix bug in game over dialog
    						- Fix bug in game activity
    						
    TODO:

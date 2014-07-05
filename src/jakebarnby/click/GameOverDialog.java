@@ -91,8 +91,9 @@ public class GameOverDialog extends CustomDialog {
 		restart.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				getActivity().setContentView(R.layout.activity_new_game);
+				GameActivity.setCount(0);
 				dialog.dismiss();
-				getActivity().recreate();
 			}
 		});
 		
