@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 public class GameActivity extends Activity {
 
+	private ClickTimer timer;
 	private AdView banner;
 	private static int count = 0;
 
@@ -32,12 +33,13 @@ public class GameActivity extends Activity {
 			getFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
-		
-		//Code for ad at top of game activity
+
+		// Code for ad at top of game activity
 		// Look up the AdView as a resource and load a request.
 		banner = (AdView) this.findViewById(R.id.adView);
 		banner.setAdListener(new MyAdListener(this));
-		AdRequest adRequest = new AdRequest.Builder().addTestDevice("C6B56C5E1BAA0F338C091FC79F9289C2").build();
+		AdRequest adRequest = new AdRequest.Builder().addTestDevice(
+				"C6B56C5E1BAA0F338C091FC79F9289C2").build();
 		banner.loadAd(adRequest);
 	}
 
@@ -62,6 +64,7 @@ public class GameActivity extends Activity {
 
 	@Override
 	public void onResume() {
+		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 		super.onResume();
 		if (banner != null) {
 			banner.resume();
@@ -74,15 +77,20 @@ public class GameActivity extends Activity {
 		if (banner != null) {
 			banner.pause();
 		}
+		if (timer != null) {
+			timer.cancel();
+		}
 		super.onPause();
+
 	}
 
-	/** Called before the activity is destroyed. */
 	@Override
 	public void onDestroy() {
-		// Destroy the AdView.
 		if (banner != null) {
 			banner.destroy();
+		}
+		if (timer != null) {
+			timer.cancel();
 		}
 		super.onDestroy();
 	}
@@ -93,15 +101,15 @@ public class GameActivity extends Activity {
 	 * @param view
 	 */
 	public void updateCount(View view) {
+		timer = (ClickTimer) new ClickTimer(5000, 1000, this);
 		TextView time = (TextView) findViewById(R.id.textView_time);
 		if (count == 0) {
 			// First click, start the count-down timer
-			new ClickTimer(5000, 1000, this).start();
+			timer.start();
 
 			time.setTextSize(100);
 		}
-		if (!time.getText().equals("Out of time!")) {
-			// Check if timer is zero therefore no more clicks should be counted
+		if (!timer.isFinished()) {
 			GameActivity.count++;
 			TextView clicks = (TextView) findViewById(R.id.textView_clickcount);
 			clicks.setText("Clicks: " + count);

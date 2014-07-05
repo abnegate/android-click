@@ -39,14 +39,21 @@ TODO:
  
   TODO:
  - Fix game over dialog appears only after timer is zeroed and button is clicked
-  ----------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
   6/7/2014 12:55 v0.91 - Fix dialog not appearing when timer zeroed
   					   - Dialogs now have own classes
   					   - Logic moved from activities to dialog classes
   
    TODO:
  - Cleaning up project files
- - Fix button click effects for highs core dialog
+ - Fix button click effects for high score dialog
+----------------------------------------------------------------------------------------
+   6/7/2014 02:04 v0.92 - Fix bug in dialog
+   						- Fix bug in game activity
+   						
+   TODO:
+ - Cleaning up project files
+ - Add sound
    
  
  

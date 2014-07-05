@@ -3,8 +3,10 @@ package jakebarnby.click;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.View.OnClickListener;
@@ -85,8 +87,7 @@ public class GameOverDialog extends CustomDialog {
 			}
 		});
 
-		Button restart = (Button) dialog
-				.findViewById(R.id.button_dialogGORestart);
+		Button restart = (Button) dialog.findViewById(R.id.button_dialogGORestart);
 		restart.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -94,6 +95,18 @@ public class GameOverDialog extends CustomDialog {
 				getActivity().recreate();
 			}
 		});
+		
+		dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+			@Override
+            public boolean onKey(DialogInterface arg0, int keyCode, KeyEvent event) {
+                // TODO Auto-generated method stub
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    getActivity().recreate();
+                    dialog.dismiss();
+                }
+                return true;
+            }
+        });
 
 	}
 	
