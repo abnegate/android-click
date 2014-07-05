@@ -6,21 +6,23 @@ import android.view.Window;
 import android.view.WindowManager;
 
 /**
- * Class that can provide a custom dialog
+ * Class that can provide dialog with the given layout
  * @author Jake
  *
  */
 
-public class CustomDialog{
+public abstract class CustomDialog{
 	
 	private Activity activity;
 	private int layoutResId;
+	
+	public abstract void showDialog();
 	
 	public CustomDialog(Activity activity, int layoutResId) {
 		this.activity = activity;
 		this.layoutResId = layoutResId;
 	}
-	
+
 	/**
 	 * Create and return the custom dialog
 	 */
@@ -34,6 +36,14 @@ public class CustomDialog{
 		// Dim the activity in the background
 		dialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
 		return dialog;
+	}
+	
+	/**
+	 * Return the activity the dialog is attached to
+	 * @return
+	 */
+	public Activity getActivity() {
+		return activity;
 	}
 
 }

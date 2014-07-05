@@ -4,7 +4,6 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
@@ -14,10 +13,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.TextView;
 
 public class MainActivity extends Activity {
 	
@@ -82,32 +77,8 @@ public class MainActivity extends Activity {
 	 * Starts a new dialog that displays the high scores
 	 */
 	public void highScore(View view) {
-		//Get the dialog object
-		CustomDialog dialogObj = new CustomDialog(this, R.layout.dialog_high_score);
-		final Dialog dialog = dialogObj.getDialog();
-
-		
-		if (!dialog.isShowing()) {
-			//Set dim for the activity behind the dialog
-			WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();  
-			lp.dimAmount=0.8f; // Dim level. 0.0 - no dim, 1.0 - completely opaque
-			dialog.getWindow().setAttributes(lp);
-			
-			//Set values to containers
-			TextView info = (TextView) dialog.findViewById(R.id.textView_dialogHSInfo);
-			info.setText(""+this.getSharedPreferences("highScores", Context.MODE_PRIVATE).getInt("highScore", 0));
-			info.setTextSize(50);
-			
-			//Set listener for high score dialog button
-			Button close = (Button) dialog.findViewById(R.id.button_dialogHSBack);
-			close.setOnClickListener(new OnClickListener(){
-				@Override
-				public void onClick(View v) {
-					dialog.dismiss();
-				}
-			});
-			dialog.show();
-		}
+		int score = this.getSharedPreferences("highScores", Context.MODE_PRIVATE).getInt("highScore", 0);
+		new HighScoreDialog(this, R.layout.dialog_high_score, score).showDialog();
 	}
 	
 	/**

@@ -24,8 +24,7 @@ public class ClickTimer extends CountDownTimer {
 	public void onFinish() {
 		 TextView time = (TextView) activity.findViewById(R.id.textView_time);
          time.setText("Out of time!");
+
+         new GameOverDialog(activity, R.layout.dialog_game_over, GameActivity.getCount()).showDialog();
 	}
-	
-
-
 }

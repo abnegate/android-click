@@ -4,7 +4,7 @@
 TODO:
  - Fix allowed to click after timer zeroed
  - Switch layouts from FrameLayout to RelativeLayout
- - Implement notice dialog for stats at timer zero: score, current highscore, clicks/minute, play again
+ - Implement notice dialog for stats at timer zero: score, current high score, clicks/minute, play again
  - Implement high score and settings activities
 
 ----------------------------------------------------------------------------------------
@@ -12,20 +12,19 @@ TODO:
 
 TODO:
  - Switch layouts from FrameLayout to RelativeLayout
- - Implement notice dialog for stats at timer zero: score, current highscore, clicks/second, play again
+ - Implement notice dialog for stats at timer zero: score, current high score, clicks/second, play again
  - Implement high score and settings activities
 ----------------------------------------------------------------------------------------
  4/7/2014 03:33 v0.2 - Add game over dialog 
  
  TODO:
  - Implement high score dialog
- - Implement sound
 ----------------------------------------------------------------------------------------
- 4/7/2014 05:33 v0.5 - Add highscore dialog
- 					 - Add highscore to game over dialog
+ 4/7/2014 05:33 v0.5 - Add high score dialog
+ 					 - Add high score to game over dialog
  					 - Add button functionality to game over dialog
  					 - Add quit button to main activity
- 					 - Remove settings/highscore activities
+ 					 - Remove settings/high score activities
  					 
  TODO:
  - Fix game over dialog appears only after timer is zeroed and button is clicked
@@ -35,3 +34,19 @@ TODO:
  					 
   TODO:
  - Fix game over dialog appears only after timer is zeroed and button is clicked
+ ----------------------------------------------------------------------------------------
+ 5/7/ 21:44 v0.9 - Add ads to game
+ 
+  TODO:
+ - Fix game over dialog appears only after timer is zeroed and button is clicked
+  ----------------------------------------------------------------------------------------
+  6/7/2014 12:55 v0.91 - Fix dialog not appearing when timer zeroed
+  					   - Dialogs now have own classes
+  					   - Logic moved from activities to dialog classes
+  
+   TODO:
+ - Cleaning up project files
+ - Fix button click effects for highs core dialog
+   
+ 
+ 
