@@ -123,7 +123,7 @@ public class GameActivity extends Activity {
 
 	private void setupAds() {
 		// Look up the AdView as a resource and load a request.
-		adView = (AdView) this.findViewById(R.id.adView);
+		adView = (AdView) findViewById(R.id.adView);
 		// Set the custom ad listener
 		adView.setAdListener(adListener);
 		// Build an ad request

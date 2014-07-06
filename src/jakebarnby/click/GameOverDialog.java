@@ -79,8 +79,7 @@ public class GameOverDialog extends CustomDialog {
 	/**
 	 * Sets listeners for the buttons of the game over dialog
 	 * 
-	 * @param dialog
-	 *            - The dialog parent of the buttons
+	 * @param dialog - The dialog parent of the buttons
 	 */
 	private void setButtonListeners(final Dialog dialog) {
 		Button close = (Button) dialog.findViewById(R.id.button_dialogGOBack);
