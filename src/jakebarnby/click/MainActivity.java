@@ -35,7 +35,7 @@ public class MainActivity extends Activity {
 		this.highScoreDialog = new HighScoreDialog(this, R.layout.dialog_high_score, highScore);
 		
         interstitial = new InterstitialAd(this);
-        interstitial.setAdUnitId(getResources().getString(R.string.interstitial_unit_id));
+        interstitial.setAdUnitId(getResources().getString(R.string.admob_insertitial_id));
         interstitial.setAdListener(new MyAdListener(this) {
         	@Override
         	public void onAdClosed() {

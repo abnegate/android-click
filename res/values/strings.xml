@@ -16,7 +16,8 @@
     <string name="dialog_newGame">New game</string>
     <string name="title_activity_ad">AdActivity</string>
     <string name="hello_world">Hello world!</string>
-    <string name="interstitial_unit_id">ca-app-pub-4043849132226838/3728744301</string>
-    <string name="banner_unit_id">ca-app-pub-4043849132226838/4324173506</string>
+    <string name="admob_insertitial_id">ca-app-pub-4043849132226838/3728744301</string>
+    <string name="admob_banner_id">ca-app-pub-4043849132226838/4324173506</string>
+    <string name="analytics_dialog_newgame"/>
 
 </resources>

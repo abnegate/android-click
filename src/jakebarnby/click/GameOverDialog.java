@@ -1,5 +1,8 @@
 package jakebarnby.click;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -88,6 +91,9 @@ public class GameOverDialog extends CustomDialog {
 			public void onClick(View v) {
 				getActivity().finish();
 				dialog.dismiss();
+				Tracker t = ((ClickTracker) getActivity().getApplication()).getTracker();
+                t.setScreenName("Click GameOverDialogNEWGAME");
+                t.send(new HitBuilders.AppViewBuilder().build());
 			}
 		});
 
