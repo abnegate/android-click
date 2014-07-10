@@ -1,8 +1,5 @@
 package jakebarnby.click;
 
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -11,116 +8,106 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import com.jakebarnby.click.R;
 
 /**
- * Extension of custom dialog provided for a game over dialog
- * @author Jake
+ * <code>FadeDialog</code> for displaying dialog with game over information.
+ * @author Jake Barnby
  *
  */
 
-public class GameOverDialog extends CustomDialog {
+public class GameOverDialog extends FadeDialog {
 
 	private int count;
 
+	// Getters and setters----------
 	public void setCount(int count) {
 		this.count = count;
 	}
+	
+	// ------------------------------
 
-	public GameOverDialog(Activity activity, int layoutResId, int count) {
-		super(activity, layoutResId);
+	public GameOverDialog(Context context, int layoutResId, int count) {
+		super(context, layoutResId);
 		this.count = count;
 	}
 
 	/**
-	 * Creates a custom dialog then displays information about the current game
+	 * Creates then shows a fade dialog that displays game over information
 	 */
 	public void showDialog() {
 		//Check the current high score
 		checkHighScore();
 		// Get the dialog object
-		CustomDialog dialogObj = this;
-		Dialog dialog = dialogObj.getDialog();
+		Dialog dialog = getDialog();
 
 		if (!dialog.isShowing()) {
-			// Set dim for the activity behind the dialog
-			WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();
-			lp.dimAmount = 0.8f; // Dim level. 0.0 - no dim, 1.0 - opaque
-			dialog.getWindow().setAttributes(lp);
-			//Set fade in/out animation
-			dialog.getWindow().getAttributes().windowAnimations = R.style.FadeDialogAnimation;
-
 			// Set values to containers
-			TextView info = (TextView) dialog
-					.findViewById(R.id.textView_dialogGOInfo);
+			TextView info = (TextView) dialog.findViewById(R.id.textView_dialogGOInfo);
 			info.setText("Your score: "
 					+ count
 					+ "\nHigh score: "
-					+ getActivity().getSharedPreferences("highScores",
-							Context.MODE_PRIVATE).getInt("highScore", 0)
+					+ getContext().getSharedPreferences("highScores", Context.MODE_PRIVATE).getInt("highScore", 0)
 					+ "\nClicks per second: " + (float) count / 5);
 			setButtonListeners(dialog);
 			dialog.show();
 		}
 	}
 	
+	/**
+	 * Check if the current score is better than the current high score
+	 */
 	private void checkHighScore() {
 		// Get the current high score
-		SharedPreferences prefs = getActivity().getSharedPreferences("highScores", Context.MODE_PRIVATE);
+		SharedPreferences prefs = getContext().getSharedPreferences("highScores", Context.MODE_PRIVATE);
 		int score = prefs.getInt("highScore", 0);
 		// If current score is greater than high score commit the new score
 		if (count > score) {
 			Editor editor = prefs.edit();
 			editor.putInt("highScore", count);
-			editor.commit();
+			editor.apply();
 		}
 	}
 	
 	/**
 	 * Sets listeners for the buttons of the game over dialog
-	 * 
 	 * @param dialog - The dialog parent of the buttons
 	 */
 	private void setButtonListeners(final Dialog dialog) {
-		Button close = (Button) dialog.findViewById(R.id.button_dialogGOBack);
-		close.setOnClickListener(new OnClickListener() {
+		((Button) dialog.findViewById(R.id.button_dialogGOClose)).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				getActivity().finish();
+				//Close button pressed, return user to main activity
+				((Activity) getContext()).finish();
 				dialog.dismiss();
-				Tracker t = ((ClickTracker) getActivity().getApplication()).getTracker();
-                t.setScreenName("Click GameOverDialogNEWGAME");
-                t.send(new HitBuilders.AppViewBuilder().build());
 			}
 		});
 
-		Button restart = (Button) dialog.findViewById(R.id.button_dialogGORestart);
-		restart.setOnClickListener(new OnClickListener() {
+		((Button) dialog.findViewById(R.id.button_dialogGONewgame)).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				getActivity().setContentView(R.layout.activity_new_game);
+				//New game button pressed, reset game activity
+				((Activity) getContext()).setContentView(R.layout.activity_new_game);
 				GameActivity.setCount(0);
 				dialog.dismiss();
 			}
 		});
 		
+		//If user presses back button while the dialog has focus, implement
+		//same functionality as new game button
 		dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 			@Override
             public boolean onKey(DialogInterface arg0, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_BACK) {
-                	getActivity().setContentView(R.layout.activity_new_game);
+                	((Activity) getContext()).setContentView(R.layout.activity_new_game);
     				GameActivity.setCount(0);
     				dialog.dismiss();
                 }
                 return true;
             }
         });
-
-	}
-	
-	
-	
+	}	
 }

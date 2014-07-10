@@ -103,17 +103,17 @@ int id action_settings 0x7f090025
 int id adView 0x7f09001c
 int id book_now 0x7f090010
 int id button_clickbutton 0x7f090019
-int id button_dialogGOBack 0x7f090020
-int id button_dialogGORestart 0x7f090021
+int id button_dialogGOClose 0x7f090020
+int id button_dialogGONewgame 0x7f090021
 int id button_dialogHSBack 0x7f090024
-int id button_highscore 0x7f090016
-int id button_newgame 0x7f090015
-int id button_quit 0x7f090017
+int id button_highscore 0x7f090017
+int id button_newgame 0x7f090016
+int id button_quit 0x7f090018
 int id buyButton 0x7f09000a
 int id buy_now 0x7f09000f
 int id buy_with_google 0x7f09000e
 int id classic 0x7f090011
-int id click_title 0x7f090018
+int id click_title 0x7f090015
 int id container 0x7f090014
 int id dialog_buttonBar 0x7f09001f
 int id grayscale 0x7f090012
@@ -135,23 +135,20 @@ int id textView_dialogGOInfo 0x7f09001e
 int id textView_dialogGOTitle 0x7f09001d
 int id textView_dialogHSInfo 0x7f090023
 int id textView_dialogHSTitle 0x7f090022
-int id textView_time 0x7f09001b
+int id textView_timer 0x7f09001b
 int id wrap_content 0x7f09000d
 int integer google_play_services_version 0x7f0a0000
 int layout activity_main 0x7f030000
 int layout activity_new_game 0x7f030001
-int layout clickbutton_background_selector 0x7f030002
-int layout custom_button 0x7f030003
+int layout click_menu_button 0x7f030002
+int layout clickbutton_background_selector 0x7f030003
 int layout dialog_game_over 0x7f030004
 int layout dialog_high_score 0x7f030005
-int layout fragment_main 0x7f030006
-int layout fragment_new_game 0x7f030007
 int menu main 0x7f0c0000
 int menu new_game 0x7f0c0001
 int string action_settings 0x7f070021
-int string admob_banner_id 0x7f070030
-int string admob_insertitial_id 0x7f07002f
-int string analytics_dialog_newgame 0x7f070031
+int string admob_banner_id 0x7f07002f
+int string admob_interstitial_id 0x7f07002e
 int string app_name 0x7f070020
 int string auth_client_needs_enabling_title 0x7f070001
 int string auth_client_needs_installation_title 0x7f070002
@@ -193,7 +190,6 @@ int string dialog_close 0x7f07002b
 int string dialog_gameOver 0x7f070029
 int string dialog_highScore 0x7f07002a
 int string dialog_newGame 0x7f07002c
-int string hello_world 0x7f07002e
 int string initial_clicks 0x7f070027
 int string title_activity_ad 0x7f07002d
 int string title_activity_new_game 0x7f070026
@@ -206,7 +202,7 @@ int style WalletFragmentDefaultButtonTextAppearance 0x7f060003
 int style WalletFragmentDefaultDetailsHeaderTextAppearance 0x7f060002
 int style WalletFragmentDefaultDetailsTextAppearance 0x7f060001
 int style WalletFragmentDefaultStyle 0x7f060004
-int style btnStyleNew 0x7f060008
+int style clickMenuButton 0x7f060008
 int[] styleable AdsAttrs { 0x7f010000, 0x7f010001, 0x7f010002 }
 int styleable AdsAttrs_adSize 0
 int styleable AdsAttrs_adSizes 1
@@ -226,8 +222,8 @@ int styleable MapAttrs_uiZoomControls 10
 int styleable MapAttrs_uiZoomGestures 11
 int styleable MapAttrs_useViewLifecycle 12
 int styleable MapAttrs_zOrderOnTop 13
-int[] styleable MyTextView { 0x7f010020 }
-int styleable MyTextView_fontName 0
+int[] styleable MyFontTextView { 0x7f010020 }
+int styleable MyFontTextView_fontName 0
 int[] styleable WalletFragmentOptions { 0x7f010011, 0x7f010012, 0x7f010013, 0x7f010014 }
 int styleable WalletFragmentOptions_environment 1
 int styleable WalletFragmentOptions_fragmentMode 3

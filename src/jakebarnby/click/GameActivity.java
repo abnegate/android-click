@@ -1,28 +1,30 @@
 package jakebarnby.click;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
-
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.jakebarnby.click.R;
 
+/**
+ * Game screen of Click app, provides the user with interface for playing the game.
+ * @author Jake Barnby
+ *
+ */
 public class GameActivity extends Activity {
-
-	private ClickTimer timer;
-	
-	private AdView adView;
-	private MyAdListener adListener;
-	private AdRequest adRequest;
 	
 	private static int count = 0;
 
+	private ClickTimer timer;
+
+	private AdView adView;
+	private AdRequest adRequest;
+
+
+	// Getters and setters----------
 	public static int getCount() {
 		return count;
 	}
@@ -31,39 +33,64 @@ public class GameActivity extends Activity {
 		count = newCount;
 	}
 
+	// -------------------------------
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 
-		if (savedInstanceState == null) {
-			getFragmentManager().beginTransaction()
-					.add(R.id.container, new PlaceholderFragment()).commit();
-		}
-		timer = (ClickTimer) new ClickTimer(5000, 1000, this);
-		adListener = new MyAdListener(this);
+		// Create timer for count down
+		timer = new ClickTimer(5000, 1000, this);
+		// Create a request for an ad
 		adRequest = new AdRequest.Builder().addTestDevice("C6B56C5E1BAA0F338C091FC79F9289C2").build();
-		
+
 		setContentView(R.layout.activity_new_game);
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.new_game, menu);
-		return true;
+	
+	/**
+	 * Find adView then load and show the ad.
+	 */
+	private void setupBannerAd() {
+		adView = (AdView) findViewById(R.id.adView);
+		adView.setAdListener(new AdListener() {
+			@Override
+			public void onAdClosed() {
+				setContentView(R.layout.activity_new_game);
+			}
+		});
+		// Build and show an ad from the previously created request
+		adView.loadAd(adRequest);
 	}
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
+	/**
+	 * Response to clickbutton button, updates count and attached text view.
+	 * @param view - The view this method was called from
+	 */
+	public void updateCount(View view) {
+		if (count == 0) {
+			// First click, reset and start the timer
+			timer.reset();
+			timer.start();
+			// Set size of timer textView
+			TextView time = (TextView) findViewById(R.id.textView_timer);
+			time.setTextSize(115);
 		}
-		return super.onOptionsItemSelected(item);
+		// If timer isn't finished increase count and update time
+		if (!timer.isFinished()) {
+			GameActivity.count++;
+			TextView clicks = (TextView) findViewById(R.id.textView_clickcount);
+			clicks.setText("Clicks: " + count);
+		}
+	}
+
+	/*
+	 * ACTIVITY RESPONSE METHODS--------------
+	 */
+	
+	@Override
+	public void onContentChanged() {
+		setupBannerAd();
 	}
 
 	@Override
@@ -94,57 +121,4 @@ public class GameActivity extends Activity {
 		}
 		super.onDestroy();
 	}
-	
-	@Override
-	public void onContentChanged() {
-		setupAds();
-	}
-
-	/**
-	 * Run from button_clickbutton onClick, serves as main game loop
-	 * 
-	 * @param view
-	 */
-	public void updateCount(View view) {
-		if (count == 0) {
-			// First click, start the count-down timer
-			timer.reset();
-			timer.start();
-			TextView time = (TextView) findViewById(R.id.textView_time);
-			time.setTextSize(115);
-		}
-		if (!timer.isFinished()) {
-			// Timer isn't finished so increase count and update text
-			GameActivity.count++;
-			TextView clicks = (TextView) findViewById(R.id.textView_clickcount);
-			clicks.setText("Clicks: " + count);
-		}
-	}
-
-	private void setupAds() {
-		// Look up the AdView as a resource and load a request.
-		adView = (AdView) findViewById(R.id.adView);
-		// Set the custom ad listener
-		adView.setAdListener(adListener);
-		// Build an ad request
-		adView.loadAd(adRequest);
-	}
-
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-	public static class PlaceholderFragment extends Fragment {
-
-		public PlaceholderFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_new_game,
-					container, false);
-			return rootView;
-		}
-	}
-
 }

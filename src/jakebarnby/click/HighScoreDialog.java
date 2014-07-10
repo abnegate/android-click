@@ -3,19 +3,19 @@ package jakebarnby.click;
 import android.app.Activity;
 import android.app.Dialog;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import com.jakebarnby.click.R;
 
 /**
- * Extension of custom dialog for displaying high score
+ * <code>FadeDialog</code> for displaying dialog with high score.
  * @author Jake
  *
  */
 
-public class HighScoreDialog extends CustomDialog {
-	
+public class HighScoreDialog extends FadeDialog {
+
 	private int highScore;
 
 	public HighScoreDialog(Activity activity, int layoutResId, int score) {
@@ -23,42 +23,34 @@ public class HighScoreDialog extends CustomDialog {
 		this.highScore = score;
 	}
 
+	// Getters and setters----------
+	public int getScore() {
+		return this.highScore;
+	}
+
+	public void setScore(int highScore) {
+		this.highScore = highScore;
+	}
+
+	// ------------------------------
+
 	@Override
 	public void showDialog() {
-		//Get the dialog object
-		CustomDialog dialogObj = this;
-		final Dialog dialog = dialogObj.getDialog();
+		// Get the dialog object
+		final Dialog dialog = getDialog();
 
-		
 		if (!dialog.isShowing()) {
-			//Set dim for the activity behind the dialog
-			WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();  
-			lp.dimAmount=0.8f; // Dim level. 0.0 - no dim, 1.0 - completely opaque
-			dialog.getWindow().setAttributes(lp);
-			//Set fade in/out animation
-			dialog.getWindow().getAttributes().windowAnimations = R.style.FadeDialogAnimation;
-			
-			//Set values to containers
-			TextView info = (TextView) dialog.findViewById(R.id.textView_dialogHSInfo);
-			info.setText(String.valueOf(highScore));
-			
-			//Set listener for high highScore dialog button
-			Button close = (Button) dialog.findViewById(R.id.button_dialogHSBack);
-			close.setOnClickListener(new OnClickListener(){
+			// Set high score to the info textView of the dialog
+			((TextView) dialog.findViewById(R.id.textView_dialogHSInfo)).setText(String.valueOf(highScore));
+
+			// Set listener for high highScore dialog close button
+			((Button) dialog.findViewById(R.id.button_dialogHSBack)).setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					dialog.dismiss();
 				}
 			});
 			dialog.show();
-		}	
-	}
-	
-	public int getScore() {
-		return this.highScore;
-	}
-	
-	public void setScore(int highScore) {
-		this.highScore = highScore;
+		}
 	}
 }
