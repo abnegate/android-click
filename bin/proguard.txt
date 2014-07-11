@@ -16,9 +16,6 @@
 # view AndroidManifest.xml #generated:23
 -keep class jakebarnby.click.MainActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:41
--keep class jakebarnby.click.SplashLoadActivity { <init>(...); }
-
 # onClick res/layout/activity_main.xml #generated:30
 -keepclassmembers class * { *** highScore(...); }
 

@@ -127,7 +127,15 @@ public class GameActivity extends Activity {
 		adViewLayout.addView(adView);
 	}
 	
-	
+	/**
+	 * Kill AdView thread
+	 */
+	protected void stopAds() {
+		if (adView != null) {
+			adView.destroy();
+			adView = null;
+		}
+	}
 	
 	/**
 	 * Create a new <code>CountDownTimer</code> to update textViews at 1 second intervals
@@ -175,12 +183,17 @@ public class GameActivity extends Activity {
 	}
 	
 	/**
-	 * Kill AdView thread
+	 * Check if the current score is better than the current high score
 	 */
-	protected void stopAds() {
-		if (adView != null) {
-			adView.destroy();
-			adView = null;
+	private void checkHighScore() {
+		// Get the current high score
+		SharedPreferences prefs = getSharedPreferences("highScores", Context.MODE_PRIVATE);
+		int score = prefs.getInt("highScore", 0);
+		// If current score is greater than high score commit the new score
+		if (count > score) {
+			Editor editor = prefs.edit();
+			editor.putInt("highScore", count);
+			editor.commit();
 		}
 	}
 		
@@ -202,21 +215,6 @@ public class GameActivity extends Activity {
 					+ "\nClicks per second: " + (float) count / 5);
 			setDialogButtonListeners(dialog);
 			dialog.show();
-		}
-	}
-
-	/**
-	 * Check if the current score is better than the current high score
-	 */
-	private void checkHighScore() {
-		// Get the current high score
-		SharedPreferences prefs = getSharedPreferences("highScores", Context.MODE_PRIVATE);
-		int score = prefs.getInt("highScore", 0);
-		// If current score is greater than high score commit the new score
-		if (count > score) {
-			Editor editor = prefs.edit();
-			editor.putInt("highScore", count);
-			editor.commit();
 		}
 	}
 	

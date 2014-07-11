@@ -83,7 +83,6 @@ public class MainActivity extends Activity {
 	public void newGame(View view) {
 		Intent intent = new Intent(MainActivity.this, GameActivity.class);
 		startActivity(intent);
-		finish();
 	}
 
 	/**
