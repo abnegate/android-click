@@ -12,19 +12,19 @@ import com.jakebarnby.click.R;
  * @author Jake Barnby
  *
  */
-public class MyFontTextView extends TextView {
+public class CustomFontTextView extends TextView {
 
-	public MyFontTextView(Context context, AttributeSet attrs, int defStyle) {
+	public CustomFontTextView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		init(attrs);
 	}
 
-	public MyFontTextView(Context context, AttributeSet attrs) {
+	public CustomFontTextView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		init(attrs);
 	}
 
-	public MyFontTextView(Context context) {
+	public CustomFontTextView(Context context) {
 		super(context);
 		init(null);
 	}
@@ -35,8 +35,8 @@ public class MyFontTextView extends TextView {
 	 */
 	private void init(AttributeSet attrs) {
 		if (attrs != null) {
-			TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.MyFontTextView);
-			String fontName = a.getString(R.styleable.MyFontTextView_fontName);
+			TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.CustomFontTextView);
+			String fontName = a.getString(R.styleable.CustomFontTextView_fontName);
 			if (fontName != null) {
 				Typeface myTypeface = Typeface.createFromAsset(getContext().getAssets(), "fonts/" + fontName);
 				setTypeface(myTypeface);

@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:context="jakebarnby.click.GameActivity" >
 
-    <jakebarnby.click.MyFontTextView
+    <jakebarnby.click.CustomFontTextView
         android:id="@+id/textView_dialogHSTitle"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
         android:layout_centerVertical="true"
         android:background="@color/white" />
 
-    <jakebarnby.click.MyFontTextView
+    <jakebarnby.click.CustomFontTextView
         android:id="@+id/textView_dialogHSInfo"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

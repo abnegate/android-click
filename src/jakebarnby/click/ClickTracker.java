@@ -4,6 +4,7 @@ import com.google.android.gms.analytics.Logger.LogLevel;
 import com.google.android.gms.analytics.Tracker;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.jakebarnby.click.R;
+
 import android.app.Application;
 
 /**

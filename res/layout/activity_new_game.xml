@@ -5,7 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="jakebarnby.click.GameActivity"
+    tools:context=".GameActivity"
     tools:ignore="MergeRootFrame" >
 
     <ImageButton
@@ -20,7 +20,7 @@
         android:onClick="updateCount"
         android:src="@layout/clickbutton_background_selector" />
 
-    <jakebarnby.click.MyFontTextView
+    <jakebarnby.click.CustomFontTextView
         android:id="@+id/textView_clickcount"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -31,36 +31,30 @@
         android:textSize="40sp"
         click:fontName="freescript.ttf" />
 
-    <jakebarnby.click.MyFontTextView
+    <jakebarnby.click.CustomFontTextView
         android:id="@+id/textView_timer"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:gravity="center_horizontal"
-        android:text="@string/click_to_begin"
+        android:text="@string/start_clicking"
         android:textColor="@color/black"
         android:textSize="65sp"
         click:fontName="freescript.ttf" />
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/adView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:background="@color/black"
         android:orientation="vertical" >
 
-        <com.google.android.gms.ads.AdView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/adView"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            ads:adSize="BANNER"
-            ads:adUnitId="@string/admob_banner_id" />
-
         <View
             android:layout_width="fill_parent"
             android:layout_height="3dp"
+            android:layout_marginTop="53dp"
             android:background="@color/white" />
-    </LinearLayout>
+    </RelativeLayout>
 
 </RelativeLayout>

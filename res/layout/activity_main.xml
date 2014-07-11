@@ -4,10 +4,10 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="jakebarnby.click.MainActivity"
+    tools:context=".MainActivity"
     tools:ignore="MergeRootFrame" >
 
-    <jakebarnby.click.MyFontTextView
+    <jakebarnby.click.CustomFontTextView
         android:id="@+id/click_title"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
