@@ -8,12 +8,43 @@
     tools:context=".GameActivity"
     tools:ignore="MergeRootFrame" >
 
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        android:orientation="vertical" >
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            ads:adSize="SMART_BANNER"
+            ads:adUnitId="@string/admob_banner_id" />
+
+        <View
+            android:id="@+id/ad_divider"
+            android:layout_width="fill_parent"
+            android:layout_height="3dp"
+            android:layout_below="@+id/adView"
+            android:background="@color/white" />
+    </RelativeLayout>
+
+    <jakebarnby.click.CustomFontTextView
+        android:id="@+id/textView_timer"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:gravity="center_horizontal"
+        android:text="@string/start_clicking"
+        android:textColor="@color/black"
+        android:textSize="80sp"
+        click:fontName="freescript.ttf" />
+
     <ImageButton
         android:id="@+id/button_clickbutton"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="190dp"
+        android:layout_centerInParent="true"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
         android:contentDescription="@string/button_clickbutton_up"
@@ -24,37 +55,11 @@
         android:id="@+id/textView_clickcount"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="550dp"
+        android:layout_marginTop="520dp"
         android:gravity="center_horizontal"
         android:text="@string/initial_clicks"
         android:textColor="@color/black"
-        android:textSize="40sp"
+        android:textSize="50sp"
         click:fontName="freescript.ttf" />
-
-    <jakebarnby.click.CustomFontTextView
-        android:id="@+id/textView_timer"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:gravity="center_horizontal"
-        android:text="@string/start_clicking"
-        android:textColor="@color/black"
-        android:textSize="65sp"
-        click:fontName="freescript.ttf" />
-
-    <RelativeLayout
-        android:id="@+id/adView"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:background="@color/black"
-        android:orientation="vertical" >
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="3dp"
-            android:layout_marginTop="53dp"
-            android:background="@color/white" />
-    </RelativeLayout>
 
 </RelativeLayout>

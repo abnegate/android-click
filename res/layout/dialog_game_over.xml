@@ -14,11 +14,11 @@
         android:layout_height="wrap_content"
         android:background="@color/black"
         android:gravity="center_horizontal"
-        android:paddingBottom="5dp"
-        android:paddingTop="5dp"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
         android:text="@string/dialog_gameOver"
         android:textColor="@color/white"
-        android:textSize="55sp"
+        android:textSize="65sp"
         click:fontName="freescript.ttf" />
 
     <View
@@ -33,10 +33,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView_dialogGOTitle"
         android:gravity="center_horizontal"
-        android:paddingBottom="15dp"
-        android:paddingTop="15dp"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp"
         android:textColor="@color/black"
-        android:textSize="35sp"
+        android:textSize="45sp"
         click:fontName="freescript.ttf" />
 
     <LinearLayout

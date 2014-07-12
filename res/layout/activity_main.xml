@@ -22,7 +22,7 @@
         android:id="@+id/button_newgame"
         style="@style/clickMenuButton"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="400dp"
         android:onClick="newGame"
         android:text="@string/button_newgame" />
@@ -31,7 +31,7 @@
         android:id="@+id/button_highscore"
         style="@style/clickMenuButton"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="470dp"
         android:onClick="highScore"
         android:text="@string/button_highscore" />
@@ -40,7 +40,7 @@
         android:id="@+id/button_quit"
         style="@style/clickMenuButton"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="540dp"
         android:onClick="showInsertitial"
         android:text="@string/button_quit" />

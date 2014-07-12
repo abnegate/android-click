@@ -1,9 +1,20 @@
 # view AndroidManifest.xml #generated:37
 -keep class com.google.android.gms.ads.AdActivity { <init>(...); }
 
+# view large\res/layout-large/activity_new_game.xml #generated:17
+# view res/layout/activity_new_game.xml #generated:17
+-keep class com.google.android.gms.ads.AdView { <init>(...); }
+
+# view large\res/layout-large/activity_main.xml #generated:10
+# view large\res/layout-large/activity_new_game.xml #generated:32
+# view large\res/layout-large/activity_new_game.xml #generated:54
+# view large\res/layout-large/dialog_game_over.xml #generated:11
+# view large\res/layout-large/dialog_game_over.xml #generated:30
+# view large\res/layout-large/dialog_high_score.xml #generated:11
+# view large\res/layout-large/dialog_high_score.xml #generated:31
 # view res/layout/activity_main.xml #generated:10
-# view res/layout/activity_new_game.xml #generated:23
-# view res/layout/activity_new_game.xml #generated:34
+# view res/layout/activity_new_game.xml #generated:32
+# view res/layout/activity_new_game.xml #generated:54
 # view res/layout/dialog_game_over.xml #generated:11
 # view res/layout/dialog_game_over.xml #generated:30
 # view res/layout/dialog_high_score.xml #generated:11
@@ -16,15 +27,19 @@
 # view AndroidManifest.xml #generated:23
 -keep class jakebarnby.click.MainActivity { <init>(...); }
 
+# onClick large\res/layout-large/activity_main.xml #generated:30
 # onClick res/layout/activity_main.xml #generated:30
 -keepclassmembers class * { *** highScore(...); }
 
+# onClick large\res/layout-large/activity_main.xml #generated:21
 # onClick res/layout/activity_main.xml #generated:21
 -keepclassmembers class * { *** newGame(...); }
 
+# onClick large\res/layout-large/activity_main.xml #generated:39
 # onClick res/layout/activity_main.xml #generated:39
 -keepclassmembers class * { *** showInsertitial(...); }
 
-# onClick res/layout/activity_new_game.xml #generated:11
+# onClick large\res/layout-large/activity_new_game.xml #generated:43
+# onClick res/layout/activity_new_game.xml #generated:43
 -keepclassmembers class * { *** updateCount(...); }
 

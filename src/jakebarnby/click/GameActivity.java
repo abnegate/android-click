@@ -13,10 +13,8 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.jakebarnby.click.R;
@@ -28,20 +26,23 @@ import com.jakebarnby.click.R;
  */
 public class GameActivity extends Activity {
 	
+	static final String GALAXYS3_TEST_ID = "C6B56C5E1BAA0F338C091FC79F9289C2";
+	static final String GALAXYNOTE10_TEST_ID = "19E4C25A726D8BF8B7C32668C35CE52B";
+	
 	private static final long COUNTDOWN_TIME = 10000;
-	private static int count = 0;
+	private static int score = 0;
 	
 	private CountDownTimer timer;
 	
 	private AdView adView;
 
 	// Getters and setters----------
-	public static int getCount() {
-		return count;
+	public static int getScore() {
+		return score;
 	}
 
-	public static void setCount(int newCount) {
-		count = newCount;
+	public static void setScore(int newScorre) {
+		score = newScorre;
 	}
 
 	// -------------------------------
@@ -60,17 +61,17 @@ public class GameActivity extends Activity {
 	 */
 
 	/**
-	 * Response to clickbutton button, updates count and attached text view.
+	 * Response to clickbutton button, updates score and attached text view.
 	 * @param view - The view this method was called from
 	 */
 	public void updateCount(View view) {
-		if (count == 0) {
+		if (score == 0) {
 			// First click, start a new timer
 			startTimer();
 		}
 		if (!((TextView)  findViewById(R.id.textView_timer)).getText().equals("0")) {
-		GameActivity.count++;
-		((TextView) findViewById(R.id.textView_clickcount)).setText("Clicks: " + count);
+		GameActivity.score++;
+		((TextView) findViewById(R.id.textView_clickcount)).setText("Clicks: " + score);
 		}
 	}
 
@@ -84,7 +85,7 @@ public class GameActivity extends Activity {
 		super.onResume();
 		// Resume ad adView
 		if (adView != null) { adView.resume(); }
-		count = 0;
+		score = 0;
 	}
 
 	@Override
@@ -114,21 +115,16 @@ public class GameActivity extends Activity {
 	 * Find adView then load and show the ad.
 	 */
 	private void setupBannerAd() {
-		RelativeLayout adViewLayout = (RelativeLayout) findViewById(R.id.adView);
 	    // Create an ad.
 		if (adView == null) {
-			adView = new AdView(getApplication());
-		    adView.setAdUnitId("ca-app-pub-4043849132226838/4324173506");
-		    adView.setAdSize(AdSize.SMART_BANNER);
-		    // Start loading the ad in the background.
-		    adView.loadAd(new AdRequest.Builder().addTestDevice("C6B56C5E1BAA0F338C091FC79F9289C2").build());
-		    // Add the AdView to the view hierarchy. The view will have no size until the ad is loaded.		
+			adView = (AdView) findViewById(R.id.adView);
+		    adView.loadAd(new AdRequest.Builder().addTestDevice(GameActivity.GALAXYNOTE10_TEST_ID).addTestDevice(GALAXYS3_TEST_ID).addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
 		}
-		adViewLayout.addView(adView);
 	}
 	
 	/**
 	 * Kill AdView thread
+	 * +
 	 */
 	protected void stopAds() {
 		if (adView != null) {
@@ -149,14 +145,14 @@ public class GameActivity extends Activity {
 				public void onTick(long millisUntilFinished) {
 					TextView timer = (TextView) findViewById(R.id.textView_timer);
 					timer.setTextSize(115);
-					//Update the count down textView with the new time remaining
+					//Update the score down textView with the new time remaining
 					timer.setText(String.valueOf(millisUntilFinished/1000));
 					
 				}
 
 				@Override
 				public void onFinish() {
-					//Set the count down textView to display 0
+					//Set the score down textView to display 0
 					((TextView) findViewById(R.id.textView_timer)).
 					setText(String.valueOf(0));
 					if (hasWindowFocus()) {
@@ -164,7 +160,7 @@ public class GameActivity extends Activity {
 					} else {
 						stopTimer();
 						resetText();
-						GameActivity.setCount(0); 
+						GameActivity.setScore(0); 
 					}
 				}
 			};
@@ -188,11 +184,11 @@ public class GameActivity extends Activity {
 	private void checkHighScore() {
 		// Get the current high score
 		SharedPreferences prefs = getSharedPreferences("highScores", Context.MODE_PRIVATE);
-		int score = prefs.getInt("highScore", 0);
+		int highScore = prefs.getInt("highScore", 0);
 		// If current score is greater than high score commit the new score
-		if (count > score) {
+		if (GameActivity.score > highScore) {
 			Editor editor = prefs.edit();
-			editor.putInt("highScore", count);
+			editor.putInt("highScore", score);
 			editor.commit();
 		}
 	}
@@ -209,15 +205,18 @@ public class GameActivity extends Activity {
 			// Set values to containers
 			TextView info = (TextView) dialog.findViewById(R.id.textView_dialogGOInfo);
 			info.setText("Your score: "
-					+ count
+					+ score
 					+ "\nHigh score: "
 					+ getSharedPreferences("highScores", Context.MODE_PRIVATE).getInt("highScore", 0)
-					+ "\nClicks per second: " + (float) count / 5);
+					+ "\nClicks per second: " + (float) score / 5);
 			setDialogButtonListeners(dialog);
 			dialog.show();
 		}
 	}
 	
+	/**
+	 * Resets <code>TextView's</code> for a new game
+	 */
 	private void resetText() {
 		TextView startClicking = (TextView) findViewById(R.id.textView_timer);
 		startClicking.setText(R.string.start_clicking);
@@ -235,6 +234,7 @@ public class GameActivity extends Activity {
 			public void onClick(View v) {
 				//Close button pressed, return user to main activity
 				Intent intent = new Intent(GameActivity.this, MainActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				startActivity(intent);
 				dialog.dismiss();
 				finish();
@@ -247,20 +247,19 @@ public class GameActivity extends Activity {
 				//New game button pressed, reset game activity
 				stopTimer();
 				resetText();
-				GameActivity.setCount(0);
+				GameActivity.setScore(0);
 				dialog.dismiss();
 			}
 		});
 		
-		//If user presses back button while the dialog has focus, implement
-		//same functionality as new game button
+		//If user presses back button while the dialog has focus, implement same functionality as new game button
 		dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 			@Override
             public boolean onKey(DialogInterface arg0, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_BACK) {
                 	stopTimer();
                 	resetText();
-    				GameActivity.setCount(0);
+    				GameActivity.setScore(0);
     				dialog.dismiss();
                 }
                 return true;

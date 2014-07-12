@@ -10,6 +10,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -63,12 +64,14 @@ public class MainActivity extends Activity {
 				@Override
 				public void onAdClosed() {
 					//Can only get here if user pressed quit menu button
+					/*Bug*/
 					finish();
 					System.exit(0);
+					Log.i("Interstitial close", "true");
 				}
 			});
 			// Load the ad
-			interstitial.loadAd(new AdRequest.Builder().addTestDevice("C6B56C5E1BAA0F338C091FC79F9289C2").build());
+			interstitial.loadAd(new AdRequest.Builder().addTestDevice(GameActivity.GALAXYNOTE10_TEST_ID).addTestDevice(GameActivity.GALAXYS3_TEST_ID).build());
 		}
 	}
 	

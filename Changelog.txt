@@ -85,6 +85,9 @@
  - Generate app icon
  - Generate mdpi resources
  - Fix analytics
+ - Fix layout on rotation
+ - Fix tablet layout
+ - Fix ad divider
  
  
  					   
