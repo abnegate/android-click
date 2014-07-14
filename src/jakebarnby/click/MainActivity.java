@@ -71,7 +71,7 @@ public class MainActivity extends Activity {
 				}
 			});
 			// Load the ad
-			interstitial.loadAd(new AdRequest.Builder().addTestDevice(GameActivity.GALAXYNOTE10_TEST_ID).addTestDevice(GameActivity.GALAXYS3_TEST_ID).build());
+			interstitial.loadAd(new AdRequest.Builder().addTestDevice(GameActivity.GALAXYNOTE10_TEST_ID).addTestDevice(GameActivity.GALAXYS3_TEST_ID).addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
 		}
 	}
 	

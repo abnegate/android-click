@@ -11,11 +11,11 @@
         android:id="@+id/click_title"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="125dp"
+        android:layout_marginTop="@dimen/textView_title_margintop"
         android:gravity="center_horizontal"
         android:text="@string/app_name"
         android:textColor="@color/black"
-        android:textSize="145sp"
+        android:textSize="@dimen/textView_title_textsize"
         click:fontName="freescript.ttf" />
 
     <Button
@@ -23,7 +23,7 @@
         style="@style/clickMenuButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="@dimen/button_newgame_margintop"
         android:onClick="newGame"
         android:text="@string/button_newgame" />
 
@@ -32,7 +32,7 @@
         style="@style/clickMenuButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="470dp"
+        android:layout_marginTop="@dimen/button_highscore_margintop"
         android:onClick="highScore"
         android:text="@string/button_highscore" />
 
@@ -41,7 +41,7 @@
         style="@style/clickMenuButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="540dp"
+        android:layout_marginTop="@dimen/button_quit_marginTop"
         android:onClick="showInsertitial"
         android:text="@string/button_quit" />
 

@@ -24,7 +24,7 @@
 
     <!-- Custom menu button style. -->
     <style name="clickMenuButton" parent="@android:style/Widget.Button">
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">@dimen/button_menubutton_textsize</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:gravity">center</item>

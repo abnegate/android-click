@@ -14,11 +14,11 @@
         android:layout_height="wrap_content"
         android:background="@color/black"
         android:gravity="center_horizontal"
-        android:paddingBottom="8dp"
-        android:paddingTop="8dp"
+        android:paddingBottom="@dimen/textView_dialogTitle_padding"
+        android:paddingTop="@dimen/textView_dialogTitle_padding"
         android:text="@string/dialog_gameOver"
         android:textColor="@color/white"
-        android:textSize="65sp"
+        android:textSize="@dimen/textView_dialogTitle_textsize"
         click:fontName="freescript.ttf" />
 
     <View
@@ -33,10 +33,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView_dialogGOTitle"
         android:gravity="center_horizontal"
-        android:paddingBottom="20dp"
-        android:paddingTop="20dp"
+        android:paddingBottom="@dimen/textView_dialogGOInfo_padding"
+        android:paddingTop="@dimen/textView_dialogGOInfo_padding"
         android:textColor="@color/black"
-        android:textSize="45sp"
+        android:textSize="@dimen/textView_dialogGOInfo_textsize"
         click:fontName="freescript.ttf" />
 
     <LinearLayout
@@ -56,7 +56,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:text="@string/dialog_close" />
+            android:text="@string/dialog_back" />
 
         <Button
             android:id="@+id/button_dialogGONewgame"

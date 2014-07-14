@@ -144,7 +144,7 @@ public class GameActivity extends Activity {
 				@Override
 				public void onTick(long millisUntilFinished) {
 					TextView timer = (TextView) findViewById(R.id.textView_timer);
-					timer.setTextSize(115);
+					//timer.setTextSize(115);
 					//Update the score down textView with the new time remaining
 					timer.setText(String.valueOf(millisUntilFinished/1000));
 					
@@ -220,7 +220,7 @@ public class GameActivity extends Activity {
 	private void resetText() {
 		TextView startClicking = (TextView) findViewById(R.id.textView_timer);
 		startClicking.setText(R.string.start_clicking);
-		startClicking.setTextSize(65);
+		//startClicking.setTextSize(65);
 		((TextView) findViewById(R.id.textView_clickcount)).setText(R.string.initial_clicks);	
 	}
 	

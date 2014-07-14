@@ -33,11 +33,11 @@
         android:id="@+id/textView_timer"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="@dimen/textView_timer_margintop"
         android:gravity="center_horizontal"
         android:text="@string/start_clicking"
         android:textColor="@color/black"
-        android:textSize="80sp"
+        android:textSize="@dimen/textView_timer_textsize"
         click:fontName="freescript.ttf" />
 
     <ImageButton
@@ -55,11 +55,11 @@
         android:id="@+id/textView_clickcount"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="520dp"
+        android:layout_marginTop="@dimen/textView_clickcount_margintop"
         android:gravity="center_horizontal"
         android:text="@string/initial_clicks"
         android:textColor="@color/black"
-        android:textSize="50sp"
+        android:textSize="@dimen/textView_clickcount_textsize"
         click:fontName="freescript.ttf" />
 
 </RelativeLayout>
