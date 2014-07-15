@@ -33,9 +33,10 @@ public class FadeDialog {
 		//Set the dim level of the activity behind
 		WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();
 		lp.dimAmount = 0.8f; // Dim level. 0.0 - no dim, 1.0 - completely opaque
-		dialog.getWindow().setAttributes(lp);
 		// Set fade in/out animation
-		dialog.getWindow().getAttributes().windowAnimations = R.style.FadeDialogAnimation;
+		lp.windowAnimations = R.style.FadeDialogAnimation;
+		dialog.getWindow().setAttributes(lp);
+		
 		return dialog;
 	}
 }

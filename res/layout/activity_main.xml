@@ -1,48 +1,63 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:click="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:baselineAligned="false"
+    android:orientation="vertical"
     tools:context=".MainActivity"
     tools:ignore="MergeRootFrame" >
 
-    <jakebarnby.click.CustomFontTextView
-        android:id="@+id/click_title"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/textView_title_margintop"
-        android:gravity="center_horizontal"
-        android:text="@string/app_name"
-        android:textColor="@color/black"
-        android:textSize="@dimen/textView_title_textsize"
-        click:fontName="freescript.ttf" />
-
-    <Button
-        android:id="@+id/button_newgame"
-        style="@style/clickMenuButton"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/button_newgame_margintop"
-        android:onClick="newGame"
-        android:text="@string/button_newgame" />
+        android:layout_height="0dp"
+        android:layout_weight="0.65" >
 
-    <Button
-        android:id="@+id/button_highscore"
-        style="@style/clickMenuButton"
+        <jakebarnby.click.CustomFontTextView
+            android:id="@+id/click_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textView_title_textsize"
+            click:fontName="freescript.ttf" />
+    </FrameLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/button_highscore_margintop"
-        android:onClick="highScore"
-        android:text="@string/button_highscore" />
+        android:layout_height="0dp"
+        android:layout_weight="0.35"
+        android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/button_quit"
-        style="@style/clickMenuButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/button_quit_marginTop"
-        android:onClick="showInsertitial"
-        android:text="@string/button_quit" />
+        <Button
+            android:id="@+id/button_newgame"
+            style="@style/clickMenuButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:onClick="newGame"
+            android:text="@string/button_newgame" />
 
-</FrameLayout>
+        <Button
+            android:id="@+id/button_highscore"
+            style="@style/clickMenuButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:onClick="highScore"
+            android:text="@string/button_highscore" />
+
+        <Button
+            android:id="@+id/button_quit"
+            style="@style/clickMenuButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:onClick="showInsertitial"
+            android:text="@string/button_quit" />
+    </LinearLayout>
+
+</LinearLayout>
