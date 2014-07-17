@@ -1,6 +1,5 @@
 package jakebarnby.click;
 
-import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.jakebarnby.click.R;
@@ -10,7 +9,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -33,7 +31,7 @@ public class MainActivity extends Activity {
 		
 		loadInterstitial();
 	}
-	
+
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
@@ -43,6 +41,7 @@ public class MainActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+		loadInterstitial();
 	}
 	
 	@Override
@@ -60,17 +59,6 @@ public class MainActivity extends Activity {
 		if (interstitial == null) {
 			interstitial = new InterstitialAd(this);
 			interstitial.setAdUnitId(getResources().getString(R.string.admob_interstitial_id));
-			interstitial.setAdListener(new AdListener() {
-				@Override
-				public void onAdClosed() {
-					//Can only get here if user pressed quit menu button
-					/*Bug*/
-					finish();
-					System.exit(0);
-					Log.i("Interstitial close", "true");
-				}
-			});
-			// Load the ad
 			interstitial.loadAd(new AdRequest.Builder().addTestDevice(GameActivity.GALAXYNOTE10_TEST_ID).addTestDevice(GameActivity.GALAXYS3_TEST_ID).addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
 		}
 	}
@@ -86,6 +74,10 @@ public class MainActivity extends Activity {
 	public void newGame(View view) {
 		Intent intent = new Intent(MainActivity.this, GameActivity.class);
 		startActivity(intent);
+		if (interstitial.isLoaded()) {
+			interstitial.show();
+		}
+		interstitial = null;
 	}
 
 	/**
@@ -118,5 +110,7 @@ public class MainActivity extends Activity {
 		if (interstitial.isLoaded()) {
 			interstitial.show();
 		}
+		interstitial = null;
+		finish();
 	}
 }

@@ -37,7 +37,8 @@
             style="@style/clickMenuButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="@dimen/button_marginbottom"
+            android:layout_weight="0.33"
             android:onClick="newGame"
             android:text="@string/button_newgame" />
 
@@ -46,7 +47,8 @@
             style="@style/clickMenuButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="@dimen/button_marginbottom"
+            android:layout_weight="0.33"
             android:onClick="highScore"
             android:text="@string/button_highscore" />
 
@@ -55,7 +57,8 @@
             style="@style/clickMenuButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="@dimen/button_marginbottom"
+            android:layout_weight="0.33"
             android:onClick="showInsertitial"
             android:text="@string/button_quit" />
     </LinearLayout>

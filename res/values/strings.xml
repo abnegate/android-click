@@ -17,6 +17,5 @@
     <string name="title_activity_ad">AdActivity</string>
     <string name="admob_interstitial_id">ca-app-pub-4043849132226838/3728744301</string>
     <string name="admob_banner_id">ca-app-pub-4043849132226838/4324173506</string>
-    <string name="loading">Loading&#8230;</string>
 
 </resources>

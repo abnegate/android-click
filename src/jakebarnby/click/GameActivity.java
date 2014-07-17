@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.jakebarnby.click.R;
@@ -29,7 +28,7 @@ public class GameActivity extends Activity {
 	static final String GALAXYS3_TEST_ID = "C6B56C5E1BAA0F338C091FC79F9289C2";
 	static final String GALAXYNOTE10_TEST_ID = "19E4C25A726D8BF8B7C32668C35CE52B";
 	
-	private static final long COUNTDOWN_TIME = 10000;
+	private static final long COUNTDOWN_TIME = 5900;
 	private static int score = 0;
 	
 	private CountDownTimer timer;
@@ -52,7 +51,7 @@ public class GameActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 		setContentView(R.layout.activity_new_game);
-		
+
 		setupBannerAd();
 	}
 	
@@ -144,9 +143,8 @@ public class GameActivity extends Activity {
 				@Override
 				public void onTick(long millisUntilFinished) {
 					TextView timer = (TextView) findViewById(R.id.textView_timer);
-					//timer.setTextSize(115);
 					//Update the score down textView with the new time remaining
-					timer.setText(String.valueOf(millisUntilFinished/1000));
+					timer.setText(Long.toString(millisUntilFinished/1000));
 					
 				}
 
@@ -215,12 +213,11 @@ public class GameActivity extends Activity {
 	}
 	
 	/**
-	 * Resets <code>TextView's</code> for a new game
+	 * Resets <code>TextView's</code> to their initial states for a new game
 	 */
 	private void resetText() {
 		TextView startClicking = (TextView) findViewById(R.id.textView_timer);
 		startClicking.setText(R.string.start_clicking);
-		//startClicking.setTextSize(65);
 		((TextView) findViewById(R.id.textView_clickcount)).setText(R.string.initial_clicks);	
 	}
 	

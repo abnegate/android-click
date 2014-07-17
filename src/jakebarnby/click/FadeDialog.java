@@ -1,6 +1,8 @@
 package jakebarnby.click;
 
 import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -28,6 +30,7 @@ public class FadeDialog {
 	public Dialog getDialog() {
 		// Removing the title of the dialog so custom one can be set
 		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 		// Set custom layout to dialog
 		dialog.setContentView(customLayoutId);
 		//Set the dim level of the activity behind
