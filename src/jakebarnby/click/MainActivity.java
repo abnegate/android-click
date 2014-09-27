@@ -1,8 +1,8 @@
 package jakebarnby.click;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
 import com.jakebarnby.click.R;
+import com.startapp.android.publish.StartAppAd;
+import com.startapp.android.publish.StartAppSDK;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -21,15 +21,14 @@ import android.widget.TextView;
  */
 public class MainActivity extends Activity {
 
-	private static InterstitialAd interstitial;
+	private StartAppAd startAppAd = new StartAppAd(this);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 		super.onCreate(savedInstanceState);
+		StartAppSDK.init(this, "109453066", "209703184", true);
 		setContentView(R.layout.activity_main);
-		
-		loadInterstitial();
 	}
 
 	@Override
@@ -41,31 +40,26 @@ public class MainActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-		loadInterstitial();
+		startAppAd.onResume();
 	}
 	
 	@Override
 	protected void onPause() {
 		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 		super.onPause();
-	}
-	
-
-	
-	/**
-	 * Creates and loads an interstitial ad
-	 */
-	private void loadInterstitial() {
-		if (interstitial == null) {
-			interstitial = new InterstitialAd(this);
-			interstitial.setAdUnitId(getResources().getString(R.string.admob_interstitial_id));
-			interstitial.loadAd(new AdRequest.Builder().addTestDevice(GameActivity.GALAXYNOTE10_TEST_ID).addTestDevice(GameActivity.GALAXYS3_TEST_ID).addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
-		}
+		startAppAd.onPause();
 	}
 	
 	/*
 	 * BUTTON RESPONSE METHODS--------------
 	 */
+	
+	@Override
+	public void onBackPressed() {
+		startAppAd.showAd(); // show the ad
+		startAppAd.loadAd(); // load the next ad
+		finish();
+	}
 
 	/**
 	 * Response to newgame button, starts a new activity that runs the game.
@@ -74,10 +68,6 @@ public class MainActivity extends Activity {
 	public void newGame(View view) {
 		Intent intent = new Intent(MainActivity.this, GameActivity.class);
 		startActivity(intent);
-		if (interstitial.isLoaded()) {
-			interstitial.show();
-		}
-		interstitial = null;
 	}
 
 	/**
@@ -107,10 +97,8 @@ public class MainActivity extends Activity {
 	 * @param view - The view this method was called from
 	 */
 	public void showInsertitial(View view) {
-		if (interstitial.isLoaded()) {
-			interstitial.show();
-		}
-		interstitial = null;
+		startAppAd.showAd(); // show the ad
+		startAppAd.loadAd(); // load the next ad
 		finish();
 	}
 }

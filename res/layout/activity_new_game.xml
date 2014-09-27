@@ -15,19 +15,19 @@
         android:background="@color/black"
         android:orientation="horizontal" >
 
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/adView"
+        <com.startapp.android.publish.banner.banner3d.Banner3D
+            android:id="@+id/startApp3DBanner"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            ads:adSize="SMART_BANNER"
-            ads:adUnitId="@string/admob_banner_id" />
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true" />
 
         <View
             android:id="@+id/ad_divider"
             android:layout_width="match_parent"
             android:layout_height="3dp"
-            android:layout_below="@+id/adView"
+            android:layout_below="@+id/startApp3DBanner"
             android:background="@color/white" />
+        
     </RelativeLayout>
 
     <jakebarnby.click.CustomFontTextView
@@ -56,7 +56,7 @@
         android:id="@+id/textView_clickcount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-	    android:layout_gravity="center"
+        android:layout_gravity="center"
         android:layout_weight="0.33"
         android:gravity="center"
         android:text="@string/initial_clicks"

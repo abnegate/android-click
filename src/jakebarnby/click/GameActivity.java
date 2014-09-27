@@ -14,9 +14,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.jakebarnby.click.R;
+import com.startapp.android.publish.StartAppAd;
+import com.startapp.android.publish.StartAppSDK;
 
 /**
  * Game screen of Click app, provides the user with interface for playing the game.
@@ -25,22 +25,20 @@ import com.jakebarnby.click.R;
  */
 public class GameActivity extends Activity {
 	
-	static final String GALAXYS3_TEST_ID = "C6B56C5E1BAA0F338C091FC79F9289C2";
-	static final String GALAXYNOTE10_TEST_ID = "19E4C25A726D8BF8B7C32668C35CE52B";
 	
 	private static final long COUNTDOWN_TIME = 5900;
-	private static int score = 0;
+	private int score = 0;
 	
 	private CountDownTimer timer;
 	
-	private AdView adView;
+	private StartAppAd startAppAd = new StartAppAd(this);
 
 	// Getters and setters----------
-	public static int getScore() {
+	public int getScore() {
 		return score;
 	}
 
-	public static void setScore(int newScorre) {
+	public void setScore(int newScorre) {
 		score = newScorre;
 	}
 
@@ -51,8 +49,8 @@ public class GameActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 		setContentView(R.layout.activity_new_game);
+		StartAppSDK.init(this, "109453066", "209703184", true);
 
-		setupBannerAd();
 	}
 	
 	/*
@@ -69,8 +67,8 @@ public class GameActivity extends Activity {
 			startTimer();
 		}
 		if (!((TextView)  findViewById(R.id.textView_timer)).getText().equals("0")) {
-		GameActivity.score++;
-		((TextView) findViewById(R.id.textView_clickcount)).setText("Clicks: " + score);
+			score++;
+			((TextView) findViewById(R.id.textView_clickcount)).setText("Clicks: " + score);
 		}
 	}
 
@@ -82,19 +80,17 @@ public class GameActivity extends Activity {
 	public void onResume() {
 		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 		super.onResume();
-		// Resume ad adView
-		if (adView != null) { adView.resume(); }
+		startAppAd.onResume();
 		score = 0;
 	}
 
 	@Override
 	public void onPause() {
 		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-		// Pause ad adView
-		if (adView != null) { adView.pause(); }
 		//Stop CountDownTimer thread
 		if (timer!=null) { timer.cancel(); timer = null; }
 		super.onPause();
+		startAppAd.onPause();
 
 	}
 
@@ -102,34 +98,7 @@ public class GameActivity extends Activity {
 	public void onDestroy() {
 		overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 		stopTimer();
-		stopAds();
 		super.onDestroy();
-	}
-	
-	/*
-	 * HELPER METHODS--------------
-	 */
-	
-	/**
-	 * Find adView then load and show the ad.
-	 */
-	private void setupBannerAd() {
-	    // Create an ad.
-		if (adView == null) {
-			adView = (AdView) findViewById(R.id.adView);
-		    adView.loadAd(new AdRequest.Builder().addTestDevice(GameActivity.GALAXYNOTE10_TEST_ID).addTestDevice(GALAXYS3_TEST_ID).addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build());
-		}
-	}
-	
-	/**
-	 * Kill AdView thread
-	 * +
-	 */
-	protected void stopAds() {
-		if (adView != null) {
-			adView.destroy();
-			adView = null;
-		}
 	}
 	
 	/**
@@ -158,7 +127,7 @@ public class GameActivity extends Activity {
 					} else {
 						stopTimer();
 						resetText();
-						GameActivity.setScore(0); 
+						setScore(0); 
 					}
 				}
 			};
@@ -184,7 +153,7 @@ public class GameActivity extends Activity {
 		SharedPreferences prefs = getSharedPreferences("highScores", Context.MODE_PRIVATE);
 		int highScore = prefs.getInt("highScore", 0);
 		// If current score is greater than high score commit the new score
-		if (GameActivity.score > highScore) {
+		if (score > highScore) {
 			Editor editor = prefs.edit();
 			editor.putInt("highScore", score);
 			editor.commit();
@@ -244,7 +213,7 @@ public class GameActivity extends Activity {
 				//New game button pressed, reset game activity
 				stopTimer();
 				resetText();
-				GameActivity.setScore(0);
+				setScore(0);
 				dialog.dismiss();
 			}
 		});
@@ -256,7 +225,7 @@ public class GameActivity extends Activity {
                 if (keyCode == KeyEvent.KEYCODE_BACK) {
                 	stopTimer();
                 	resetText();
-    				GameActivity.setScore(0);
+    				setScore(0);
     				dialog.dismiss();
                 }
                 return true;

@@ -80,14 +80,15 @@
  					   - Rename MyTextView -> MyFontTextView
  					   - Rename CustomDialog -> FadeDialog
  					   - Clean up code for release
+----------------------------------------------------------------------------------------
+ 12/8/2014 14:25 v1.0 - Generate app icon
+ 	 				  - Fix layout on rotation
+ 					  - Fix tablet layout
+ 					  - Fix ad divider
+----------------------------------------------------------------------------------------
+ 27/9/2014 12:32 v1.1 - Remove admob sdk and use startApp					  			  
  					   
- TODO:
- - Generate app icon
- - Generate mdpi resources
- - Fix analytics
- - Fix layout on rotation
- - Fix tablet layout
- - Fix ad divider
+
  
  
  					   
