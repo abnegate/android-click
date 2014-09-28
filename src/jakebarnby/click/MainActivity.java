@@ -21,7 +21,7 @@ import android.widget.TextView;
  */
 public class MainActivity extends Activity {
 
-	private StartAppAd startAppAd = new StartAppAd(this);
+	private StartAppAd startAppAd;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +29,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		StartAppSDK.init(this, "109453066", "209703184", true);
 		setContentView(R.layout.activity_main);
+		startAppAd = new StartAppAd(this);
 	}
 
 	@Override

@@ -1,6 +1,3 @@
-# view AndroidManifest.xml #generated:55
--keep class com.google.android.gms.ads.AdActivity { <init>(...); }
-
 # view AndroidManifest.xml #generated:31
 -keep class com.startapp.android.publish.AppWallActivity { <init>(...); }
 
